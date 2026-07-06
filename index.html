@@ -3,16 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dr. Jayna K. Donga | Academic Portfolio</title>
-    <meta name="description" content="Academic portfolio of Dr. Jayna K. Donga, Assistant Professor in Computer Engineering.">
+    <title>Dr. Jayna Donga | Academic Portfolio</title>
+    <meta name="description" content="Academic portfolio of Dr. Jayna Donga, Assistant Professor in Computer Engineering.">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="#home" aria-label="Dr. Jayna K. Donga home">
+      <a class="brand" href="#home" aria-label="Dr. Jayna Donga home">
         <span class="brand-mark">JD</span>
         <span>
-          <strong>Dr. Jayna K. Donga</strong>
+          <strong>Dr. Jayna Donga</strong>
           <small>Computer Engineering</small>
         </span>
       </a>
@@ -20,7 +20,7 @@
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="#about">About</a>
         <a href="#subjects">Subjects</a>
-        <a href="#materials">Material Upload</a>
+        <a href="#materials">Materials</a>
         <a href="#research">Research</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -32,15 +32,15 @@
         <div class="hero-content">
           <div class="hero-text">
             <p class="eyebrow">Assistant Professor | Researcher | Academic Coordinator</p>
-            <h1>Dr. Jayna K. Donga</h1>
+            <h1>Dr. Jayna Donga</h1>
             <p class="hero-copy">Assistant Professor, Department of Computer Engineering, MBIT Engineering College, New V. V. Nagar.</p>
             <div class="hero-actions">
               <a class="button primary" href="#subjects">View Subjects</a>
-              <a class="button secondary" href="#materials">Upload Materials</a>
+              <a class="button secondary" href="#materials">Study Materials</a>
             </div>
           </div>
           <figure class="profile-card">
-            <img src="assets/dr-jayna-donga.jpg" alt="Portrait of Dr. Jayna K. Donga">
+            <img src="assets/dr-jayna-donga.jpg" alt="Portrait of Dr. Jayna Donga">
             <figcaption>
               <strong>13+ Years</strong>
               <span>Academic Experience</span>
@@ -75,7 +75,7 @@
         </div>
         <div class="about-grid">
           <div>
-            <p>Dr. Jayna K. Donga is an Assistant Professor in the Department of Computer Engineering at MBIT Engineering College. Her academic work spans teaching, research, institutional coordination, and student development.</p>
+            <p>Dr. Jayna Donga is an Assistant Professor in the Department of Computer Engineering at MBIT Engineering College. Her academic work spans teaching, research, institutional coordination, and student development.</p>
             <p>Her areas of interest include Operating Systems, Distributed Operating Systems, Real-Time Operating Systems, Data Structures, and Compiler Design.</p>
           </div>
           <div class="info-panel">
@@ -161,52 +161,36 @@
 
       <section class="section upload-section" id="materials">
         <div class="section-heading">
-          <p class="eyebrow">Material Upload</p>
-          <h2>Subject-Wise Material Upload</h2>
+          <p class="eyebrow">Student Resources</p>
+          <h2>Subject-Wise Materials</h2>
         </div>
-        <div class="upload-grid">
-          <form class="upload-form">
-            <label>
-              Subject
-              <select id="materialSubject" name="subject">
-                <option>Operating Systems</option>
-                <option>Distributed Computing</option>
-                <option>C Programming</option>
-                <option>Data Structures</option>
-                <option>Compiler Design</option>
-                <option>Computer Graphics</option>
-                <option>UML</option>
-              </select>
-            </label>
-            <label>
-              Material Type
-              <select id="materialType" name="type">
-                <option>Lecture Notes</option>
-                <option>Assignment</option>
-                <option>Question Bank</option>
-                <option>Lab Manual</option>
-                <option>Presentation</option>
-                <option>Reference Link</option>
-              </select>
-            </label>
-            <label>
-              Title
-              <input id="materialTitle" type="text" name="title" placeholder="Example: Unit 1 Process Scheduling Notes">
-            </label>
-            <label>
-              File / Drive Link
-              <input id="materialLink" type="url" name="link" placeholder="Paste Google Drive or GitHub file link">
-            </label>
-            <button class="button primary" type="button" id="addMaterial">Add To Material List</button>
-          </form>
-          <div class="upload-list">
-            <h3>Material List Preview</h3>
-            <p>Add subject-wise files or Drive links here. When this site is published on GitHub Pages, the list can be stored as static links or connected later to Google Drive / backend storage.</p>
-            <ul id="materialList">
-              <li><strong>Operating Systems:</strong> Unit-wise notes and scheduling examples</li>
-              <li><strong>Data Structures:</strong> Practice assignments and lab programs</li>
-              <li><strong>Compiler Design:</strong> Question bank and parser practice material</li>
-            </ul>
+        <div class="student-materials">
+          <p class="materials-intro">Students can access only the study content published by the admin. New files, notes, assignments, and links will appear here after they are added from the admin side.</p>
+          <div class="resource-table" role="table" aria-label="Published subject materials">
+            <div class="resource-row resource-head" role="row">
+              <span role="columnheader">Subject</span>
+              <span role="columnheader">Material</span>
+              <span role="columnheader">Type</span>
+              <span role="columnheader">Access</span>
+            </div>
+            <div class="resource-row" role="row">
+              <span role="cell">Operating Systems</span>
+              <span role="cell">Unit-wise notes and scheduling examples</span>
+              <span role="cell">Lecture Notes</span>
+              <span role="cell"><a href="#contact">Request Link</a></span>
+            </div>
+            <div class="resource-row" role="row">
+              <span role="cell">Data Structures</span>
+              <span role="cell">Practice assignments and lab programs</span>
+              <span role="cell">Assignment</span>
+              <span role="cell"><a href="#contact">Request Link</a></span>
+            </div>
+            <div class="resource-row" role="row">
+              <span role="cell">Compiler Design</span>
+              <span role="cell">Question bank and parser practice material</span>
+              <span role="cell">Question Bank</span>
+              <span role="cell"><a href="#contact">Request Link</a></span>
+            </div>
           </div>
         </div>
       </section>
@@ -292,7 +276,7 @@
       <section class="section contact" id="contact">
         <div class="section-heading">
           <p class="eyebrow">Contact</p>
-          <h2>Connect With Dr. Jayna K. Donga</h2>
+          <h2>Connect With Dr. Jayna Donga</h2>
         </div>
         <div class="contact-grid">
           <div>
@@ -328,7 +312,7 @@
     </main>
 
     <footer class="site-footer">
-      <p>© 2026 Dr. Jayna K. Donga. Academic Portfolio.</p>
+      <p>© 2026 Dr. Jayna Donga. Academic Portfolio.</p>
       <a href="#home">Back to top</a>
     </footer>
 

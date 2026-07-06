@@ -418,6 +418,61 @@ address,
   background: transparent;
 }
 
+.student-materials {
+  display: grid;
+  gap: 18px;
+}
+
+.materials-intro {
+  max-width: 760px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.resource-table {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.resource-row {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr 120px;
+  gap: 1px;
+  border-top: 1px solid var(--line);
+}
+
+.resource-row:first-child {
+  border-top: 0;
+}
+
+.resource-row span {
+  padding: 15px 16px;
+  color: var(--muted);
+}
+
+.resource-head span {
+  background: var(--teal-dark);
+  color: var(--white);
+  font-weight: 900;
+}
+
+.resource-row a {
+  color: var(--teal-dark);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.admin-panel h1 {
+  margin: 0;
+  font-size: 44px;
+  line-height: 1.08;
+  color: var(--ink);
+}
+
 .upload-form,
 .contact-form {
   display: grid;
@@ -580,7 +635,8 @@ address {
   .split-list,
   .about-grid,
   .contact-grid,
-  .upload-grid {
+  .upload-grid,
+  .resource-row {
     grid-template-columns: 1fr;
   }
 
@@ -602,6 +658,10 @@ address {
   }
 
   .section-heading h2 {
+    font-size: 36px;
+  }
+
+  .admin-panel h1 {
     font-size: 36px;
   }
 }
@@ -634,6 +694,10 @@ address {
   }
 
   .section-heading h2 {
+    font-size: 31px;
+  }
+
+  .admin-panel h1 {
     font-size: 31px;
   }
 

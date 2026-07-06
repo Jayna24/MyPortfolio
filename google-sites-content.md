@@ -1,17 +1,17 @@
-# Google Sites Static Content For Dr. Jayna K. Donga
+# Google Sites Static Content For Dr. Jayna Donga
 
 Use this document to recreate the portfolio in Google Sites. Replace or add links as subject material files become available.
 
 ## Site Name
 
-Dr. Jayna K. Donga | Academic Portfolio
+Dr. Jayna Donga | Academic Portfolio
 
 ## Navigation
 
 - Home
 - About
 - Subjects
-- Material Upload
+- Materials
 - Research
 - Responsibilities
 - Contact
@@ -19,7 +19,7 @@ Dr. Jayna K. Donga | Academic Portfolio
 ## Home Page
 
 Headline:
-Dr. Jayna K. Donga
+Dr. Jayna Donga
 
 Subheading:
 Assistant Professor | Researcher | Academic Coordinator
@@ -39,7 +39,7 @@ Use image:
 
 ## About Page
 
-Dr. Jayna K. Donga is an Assistant Professor in the Department of Computer Engineering at MBIT Engineering College. Her academic work spans teaching, research, institutional coordination, and student development.
+Dr. Jayna Donga is an Assistant Professor in the Department of Computer Engineering at MBIT Engineering College. Her academic work spans teaching, research, institutional coordination, and student development.
 
 Objective:
 To contribute to the organization with best individual efforts in achieving organizational goals and to continuously enhance professional skills through learning, research, and exposure to new challenges.
@@ -101,7 +101,7 @@ Lexical analysis, parsing, syntax-directed translation, optimization, and code g
 
 Graphics algorithms, modeling concepts, and structured software design representation.
 
-## Material Upload Page
+## Admin Material Management Page
 
 Purpose:
 Create one page or tab where subject-wise material links can be maintained.
@@ -126,7 +126,7 @@ For Google Sites:
 1. Upload PDFs, DOCX files, PPT files, and worksheets to Google Drive.
 2. Create subject-wise folders in Drive.
 3. Set sharing to Viewer access for students.
-4. Paste Drive links in the Material Upload page.
+4. Paste Drive links in the Admin Material Management Page.
 5. Use buttons or tables for each subject.
 
 Suggested folder structure:
@@ -226,4 +226,5 @@ Contact form fields:
 
 ## GitHub Pages Note
 
-The local website includes a Material Upload form-style tab for organizing links. GitHub Pages is static hosting, so it cannot directly store uploaded files by itself. For real uploads, use Google Drive folders and paste links, or later connect a backend such as Firebase, Supabase, or a small PHP/MySQL upload system.
+The local website includes a Materials form-style tab for organizing links. GitHub Pages is static hosting, so it cannot directly store uploaded files by itself. For real uploads, use Google Drive folders and paste links, or later connect a backend such as Firebase, Supabase, or a small PHP/MySQL upload system.
+

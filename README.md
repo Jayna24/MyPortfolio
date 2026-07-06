@@ -1,6 +1,6 @@
-# Dr. Jayna K. Donga Academic Portfolio
+# Dr. Jayna Donga Academic Portfolio
 
-This folder contains a GitHub Pages-ready academic portfolio website for Dr. Jayna K. Donga.
+This folder contains a GitHub Pages-ready academic portfolio website for Dr. Jayna Donga.
 
 ## Files
 
@@ -17,12 +17,13 @@ This folder contains a GitHub Pages-ready academic portfolio website for Dr. Jay
 - About
 - Qualifications & Skills
 - Subjects Taught
-- Subject-Wise Material Upload
+- Subject-Wise Materials
 - Academic Experience
 - Research Profile
 - Responsibilities
 - Contact
 
-## Material Upload Note
+## Admin Material Management Note
 
-GitHub Pages is static hosting, so it cannot store uploaded files directly. The current upload tab is a front-end organizer for subject-wise material links. For production use, upload files to Google Drive and paste the shared links, or connect a backend later.
+GitHub Pages is static hosting, so it cannot store uploaded files directly. The public page now shows student-facing subject materials only. Use `admin.html` for preparing material entries, then publish final Google Drive or GitHub file links into the public materials section.
+
