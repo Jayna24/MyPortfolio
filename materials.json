@@ -1,6 +1,15 @@
 [
   {
     "subject": "Operating Systems",
+    "title": "Test",
+    "type": "Lecture Notes",
+    "fileName": "Seat_Matrix.png",
+    "path": "materials/operating-systems/1783577820619-seat-matrix.png",
+    "url": "materials/operating-systems/1783577820619-seat-matrix.png",
+    "uploadedAt": "2026-07-09"
+  },
+  {
+    "subject": "Operating Systems",
     "title": "Unit-wise notes and scheduling examples",
     "type": "Lecture Notes",
     "fileName": "",
