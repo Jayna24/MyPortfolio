@@ -25,5 +25,7 @@ This folder contains a GitHub Pages-ready academic portfolio website for Dr. Jay
 
 ## Admin Material Management Note
 
-GitHub Pages is static hosting, so it cannot store uploaded files directly. The public page now shows student-facing subject materials only. Use `admin.html` for preparing material entries, then publish final Google Drive or GitHub file links into the public materials section.
+The public page reads `materials.json` and shows student-facing subject materials only. The admin page at `admin.html` lets an authorized admin enter a GitHub token in the browser, upload a file into the repository under `materials/`, and update `materials.json` so students can download the published material.
+
+Use a fine-grained GitHub token limited to this repository with Contents read/write access. Do not hard-code the token into the website.
 

@@ -473,6 +473,33 @@ address,
   color: var(--ink);
 }
 
+.admin-note {
+  margin-bottom: 22px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--teal);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.admin-note p,
+.form-status {
+  margin: 0;
+  color: var(--muted);
+}
+
+.form-status {
+  font-size: 14px;
+}
+
+.is-disabled {
+  opacity: 0.72;
+}
+
+.admin-list {
+  margin-top: 18px;
+}
+
 .upload-form,
 .contact-form {
   display: grid;

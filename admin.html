@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin | Dr. Jayna Donga Materials</title>
-    <meta name="description" content="Admin page for preparing subject-wise study material entries.">
+    <title>Admin Login | Dr. Jayna Donga Materials</title>
+    <meta name="description" content="Admin page for uploading subject-wise materials to GitHub.">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -24,14 +24,30 @@
     <main>
       <section class="section admin-panel">
         <div class="section-heading">
-          <p class="eyebrow">Admin Side</p>
-          <h1>Subject Material Manager</h1>
+          <p class="eyebrow">Admin Login</p>
+          <h1>GitHub Material Upload</h1>
+        </div>
+        <div class="admin-note">
+          <p>This admin page uploads files directly into the `Jayna24/MyPortfolio` GitHub repository and updates the public material list. Use a fine-grained GitHub token with Contents read/write access for this repository. The token stays in this browser session and is not saved in the website code.</p>
         </div>
         <div class="upload-grid">
-          <form class="upload-form">
+          <form class="upload-form" id="adminLoginForm">
+            <label>
+              GitHub Token
+              <input id="githubToken" type="password" autocomplete="off" placeholder="Paste token only in the browser">
+            </label>
+            <label>
+              Repository
+              <input id="githubRepo" type="text" value="Jayna24/MyPortfolio">
+            </label>
+            <button class="button primary" type="button" id="adminLogin">Login To Admin</button>
+            <p class="form-status" id="loginStatus">Not connected.</p>
+          </form>
+
+          <form class="upload-form is-disabled" id="materialUploadForm">
             <label>
               Subject
-              <select id="materialSubject" name="subject">
+              <select id="materialSubject" name="subject" disabled>
                 <option>Operating Systems</option>
                 <option>Distributed Computing</option>
                 <option>C Programming</option>
@@ -43,7 +59,7 @@
             </label>
             <label>
               Material Type
-              <select id="materialType" name="type">
+              <select id="materialType" name="type" disabled>
                 <option>Lecture Notes</option>
                 <option>Assignment</option>
                 <option>Question Bank</option>
@@ -54,23 +70,23 @@
             </label>
             <label>
               Title
-              <input id="materialTitle" type="text" name="title" placeholder="Example: Unit 1 Process Scheduling Notes">
+              <input id="materialTitle" type="text" name="title" placeholder="Example: Unit 1 Process Scheduling Notes" disabled>
             </label>
             <label>
-              File / Drive Link
-              <input id="materialLink" type="url" name="link" placeholder="Paste Google Drive or GitHub file link">
+              Material File
+              <input id="materialFile" type="file" disabled>
             </label>
-            <button class="button primary" type="button" id="addMaterial">Add To Admin List</button>
+            <button class="button primary" type="button" id="uploadMaterial" disabled>Upload To GitHub</button>
+            <p class="form-status" id="uploadStatus">Login first, then upload material.</p>
           </form>
-          <div class="upload-list">
-            <h3>Admin Material Entries</h3>
-            <p>This page prepares material entries for admin use. On GitHub Pages, true file upload requires Google Drive links or a backend. Published links should be added to the public materials section.</p>
-            <ul id="materialList">
-              <li><strong>Operating Systems:</strong> Unit-wise notes and scheduling examples (Lecture Notes)</li>
-              <li><strong>Data Structures:</strong> Practice assignments and lab programs (Assignment)</li>
-              <li><strong>Compiler Design:</strong> Question bank and parser practice material (Question Bank)</li>
-            </ul>
-          </div>
+        </div>
+
+        <div class="upload-list admin-list">
+          <h3>Published Material List</h3>
+          <p>After upload, the public Materials section will show the uploaded file after GitHub Pages finishes deploying.</p>
+          <ul id="materialList">
+            <li>Login to load current materials.</li>
+          </ul>
         </div>
       </section>
     </main>
