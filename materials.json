@@ -1,6 +1,15 @@
 [
   {
     "subject": "Operating Systems",
+    "title": "Unit-1 (Introduction to OS)",
+    "type": "Presentation",
+    "fileName": "Operating-Systems-Introduction.pptx",
+    "path": "materials/operating-systems/1783703203336-operating-systems-introduction.pptx",
+    "url": "materials/operating-systems/1783703203336-operating-systems-introduction.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Operating Systems",
     "title": "Test",
     "type": "Lecture Notes",
     "fileName": "Seat_Matrix.png",
