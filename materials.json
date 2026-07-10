@@ -1,11 +1,11 @@
 [
   {
     "subject": "Operating Systems",
-    "title": "Unit-6 (File Allocation)",
-    "type": "Presentation",
+    "title": "Unit-6 (File and I/O Management)",
+    "type": "Lecture Notes",
     "fileName": "File-Allocation.pptx",
-    "path": "materials/operating-systems/1783703696455-file-allocation.pptx",
-    "url": "materials/operating-systems/1783703696455-file-allocation.pptx",
+    "path": "materials/operating-systems/1783703814237-file-allocation.pptx",
+    "url": "materials/operating-systems/1783703814237-file-allocation.pptx",
     "uploadedAt": "2026-07-10"
   },
   {
