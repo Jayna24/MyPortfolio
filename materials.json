@@ -1,6 +1,24 @@
 [
   {
     "subject": "Operating Systems",
+    "title": "Unit-5 (Memory Management)",
+    "type": "Presentation",
+    "fileName": "Virtual Memory.pptx",
+    "path": "materials/operating-systems/1783703588512-virtual-memory.pptx",
+    "url": "materials/operating-systems/1783703588512-virtual-memory.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Operating Systems",
+    "title": "Unit-5 (Memory Management)",
+    "type": "Presentation",
+    "fileName": "Virtual Memory.pptx",
+    "path": "materials/operating-systems/1783703564430-virtual-memory.pptx",
+    "url": "materials/operating-systems/1783703564430-virtual-memory.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Operating Systems",
     "title": "Unit-4 (Dead Lock Management)",
     "type": "Presentation",
     "fileName": "Deadlock Management.pptx",
