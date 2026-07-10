@@ -1,6 +1,15 @@
 [
   {
     "subject": "Compiler Design",
+    "title": "Unit-4 (Syntax Analysis-Top Down Parsers)",
+    "type": "Lecture Notes",
+    "fileName": "Syntax-Analysis-Top-Down-Parsers.pptx",
+    "path": "materials/compiler-design/1783704514607-syntax-analysis-top-down-parsers.pptx",
+    "url": "materials/compiler-design/1783704514607-syntax-analysis-top-down-parsers.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Compiler Design",
     "title": "Unit-3(Lexical Analysis)",
     "type": "Lecture Notes",
     "fileName": "From-Regular-Expressions-to-Finite-Automata.pptx",
