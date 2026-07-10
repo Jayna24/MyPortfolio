@@ -1,5 +1,23 @@
 [
   {
+    "subject": "Data Structures",
+    "title": "Unit-1 (Introduction)",
+    "type": "Presentation",
+    "fileName": "Introduction-Data-Structures.pptx",
+    "path": "materials/data-structures/1783704992170-introduction-data-structures.pptx",
+    "url": "materials/data-structures/1783704992170-introduction-data-structures.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Data Structures",
+    "title": "Unit-1 (Introduction)",
+    "type": "Presentation",
+    "fileName": "Introduction-Data-Structures.pptx",
+    "path": "materials/data-structures/1783704976449-introduction-data-structures.pptx",
+    "url": "materials/data-structures/1783704976449-introduction-data-structures.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
     "subject": "Compiler Design",
     "title": "Unit-4 (Contex free Grammars)",
     "type": "Lecture Notes",
