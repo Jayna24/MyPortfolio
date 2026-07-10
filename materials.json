@@ -1,6 +1,15 @@
 [
   {
     "subject": "Operating Systems",
+    "title": "Unit-7 (Linux and Windows Management)",
+    "type": "Lecture Notes",
+    "fileName": "Windows and Linux.pptx",
+    "path": "materials/operating-systems/1783703945126-windows-and-linux.pptx",
+    "url": "materials/operating-systems/1783703945126-windows-and-linux.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Operating Systems",
     "title": "Unit-6 (File and I/O Management)",
     "type": "Lecture Notes",
     "fileName": "File-Allocation.pptx",
