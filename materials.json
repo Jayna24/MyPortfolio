@@ -1,6 +1,24 @@
 [
   {
     "subject": "Data Structures",
+    "title": "Unit-3 (Non-Linear Data Structures-Graphs)",
+    "type": "Presentation",
+    "fileName": "Graphs.pptx",
+    "path": "materials/data-structures/1783705339296-graphs.pptx",
+    "url": "materials/data-structures/1783705339296-graphs.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Data Structures",
+    "title": "Unit-3 (Non-Linear Data Structures-Graphs)",
+    "type": "Presentation",
+    "fileName": "Graphs.pptx",
+    "path": "materials/data-structures/1783705329809-graphs.pptx",
+    "url": "materials/data-structures/1783705329809-graphs.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Data Structures",
     "title": "Unit-3 (Non-Linear Data Structures-Tree)",
     "type": "Presentation",
     "fileName": "Tree.pptx",
