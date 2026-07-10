@@ -1,6 +1,15 @@
 [
   {
     "subject": "Operating Systems",
+    "title": "Unit-3 (Inter Process Communication)",
+    "type": "Presentation",
+    "fileName": "Interprocess Communication.pptx",
+    "path": "materials/operating-systems/1783703440908-interprocess-communication.pptx",
+    "url": "materials/operating-systems/1783703440908-interprocess-communication.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Operating Systems",
     "title": "Unit-2 (Process-Thread management)",
     "type": "Presentation",
     "fileName": "Process -Thread-Management.pptx",
