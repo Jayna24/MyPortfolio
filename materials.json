@@ -1,6 +1,15 @@
 [
   {
     "subject": "Operating Systems",
+    "title": "Unit-6 (File Allocation)",
+    "type": "Presentation",
+    "fileName": "File-Allocation.pptx",
+    "path": "materials/operating-systems/1783703696455-file-allocation.pptx",
+    "url": "materials/operating-systems/1783703696455-file-allocation.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Operating Systems",
     "title": "Unit-5 (Memory Management)",
     "type": "Presentation",
     "fileName": "Virtual Memory.pptx",
