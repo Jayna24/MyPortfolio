@@ -1,6 +1,15 @@
 [
   {
     "subject": "Data Structures",
+    "title": "Unit-2 Part-3",
+    "type": "Lecture Notes",
+    "fileName": "DS-Linked List.pdf",
+    "path": "materials/data-structures/1783746342750-ds-linked-list.pdf",
+    "url": "materials/data-structures/1783746342750-ds-linked-list.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Data Structures",
     "title": "Unit-2 Part-2",
     "type": "Lecture Notes",
     "fileName": "Queue.pdf",
