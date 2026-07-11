@@ -1,6 +1,24 @@
 [
   {
     "subject": "Data Structures",
+    "title": "Unit-3 Part-3",
+    "type": "Lecture Notes",
+    "fileName": "2-3 Trees.pdf",
+    "path": "materials/data-structures/1783746548500-2-3-trees.pdf",
+    "url": "materials/data-structures/1783746548500-2-3-trees.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Data Structures",
+    "title": "Unit-3 Part-3",
+    "type": "Lecture Notes",
+    "fileName": "2-3 Trees.pdf",
+    "path": "materials/data-structures/1783746527706-2-3-trees.pdf",
+    "url": "materials/data-structures/1783746527706-2-3-trees.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Data Structures",
     "title": "Unit-3 Part-2",
     "type": "Lecture Notes",
     "fileName": "Graph.pdf",
