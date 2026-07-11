@@ -63,19 +63,19 @@ adminLoginButton?.addEventListener("click", async () => {
   state.repo = githubRepoInput.value.trim() || "Jayna24/MyPortfolio";
 
   if (!state.token) {
-    loginStatus.textContent = "Enter a GitHub token to continue.";
+    setText(loginStatus, "Enter a GitHub token to continue.");
     return;
   }
 
-  loginStatus.textContent = "Checking GitHub access...";
+  setText(loginStatus, "Checking GitHub access...");
   try {
     await githubApi(`repos/${state.repo}`);
     sessionStorage.setItem(SESSION_TOKEN_KEY, state.token);
     sessionStorage.setItem(SESSION_REPO_KEY, state.repo);
-    loginStatus.textContent = "Login successful. Opening material upload page...";
+    setText(loginStatus, "Login successful. Opening material upload page...");
     window.location.href = "materials-admin.html";
   } catch (error) {
-    loginStatus.textContent = `Login failed: ${error.message}`;
+    setText(loginStatus, `Login failed: ${error.message}`);
   }
 });
 
@@ -90,17 +90,17 @@ uploadMaterialButton?.addEventListener("click", async () => {
   const isEditing = state.editIndex !== null;
 
   if (!file && !isEditing) {
-    uploadStatus.textContent = "Choose a file first.";
+    setText(uploadStatus, "Choose a file first.");
     return;
   }
 
   if (!title) {
-    uploadStatus.textContent = "Enter a material title.";
+    setText(uploadStatus, "Enter a material title.");
     return;
   }
 
   uploadMaterialButton.disabled = true;
-  uploadStatus.textContent = isEditing ? "Saving material changes..." : "Uploading file to GitHub...";
+  setText(uploadStatus, isEditing ? "Saving material changes..." : "Uploading file to GitHub...");
 
   try {
     const previousItem = isEditing ? state.materials[state.editIndex] : null;
@@ -144,10 +144,10 @@ uploadMaterialButton?.addEventListener("click", async () => {
     await writeMaterialsJson();
     renderAdminMaterials();
     resetMaterialForm();
-    uploadStatus.textContent = "Saved. GitHub Pages will show the update after deployment finishes.";
+    setText(uploadStatus, "Saved. GitHub Pages will show the update after deployment finishes.");
     await showAlert("Saved", "Material information has been saved successfully.", "success");
   } catch (error) {
-    uploadStatus.textContent = `Save failed: ${error.message}`;
+    setText(uploadStatus, `Save failed: ${error.message}`);
     await showAlert("Save failed", error.message, "error");
   } finally {
     uploadMaterialButton.disabled = false;
@@ -171,7 +171,7 @@ materialList?.addEventListener("click", async (event) => {
     const confirmed = await confirmDelete(item.title);
     if (!confirmed) return;
 
-    uploadStatus.textContent = "Deleting material...";
+    setText(uploadStatus, "Deleting material...");
     try {
       if (item.path) {
         await deleteGitHubFile(item.path, `Delete material ${item.fileName || item.title}`, true);
@@ -180,10 +180,10 @@ materialList?.addEventListener("click", async (event) => {
       await writeMaterialsJson();
       renderAdminMaterials();
       resetMaterialForm();
-      uploadStatus.textContent = "Deleted. GitHub Pages will update after deployment finishes.";
+      setText(uploadStatus, "Deleted. GitHub Pages will update after deployment finishes.");
       await showAlert("Deleted", "Material has been removed.", "success");
     } catch (error) {
-      uploadStatus.textContent = `Delete failed: ${error.message}`;
+      setText(uploadStatus, `Delete failed: ${error.message}`);
       await showAlert("Delete failed", error.message, "error");
     }
   }
@@ -191,7 +191,7 @@ materialList?.addEventListener("click", async (event) => {
 
 cancelEditButton?.addEventListener("click", () => {
   resetMaterialForm();
-  uploadStatus.textContent = "Edit cancelled.";
+  setText(uploadStatus, "Edit cancelled.");
 });
 
 function subjectGroup(subject) {
@@ -267,14 +267,14 @@ async function initMaterialsAdmin() {
     return;
   }
 
-  uploadStatus.textContent = "Loading uploaded materials...";
+  setText(uploadStatus, "Loading uploaded materials...");
   try {
     await githubApi(`repos/${state.repo}`);
     state.materials = await readMaterialsFromGitHub();
     renderAdminMaterials();
-    uploadStatus.textContent = "Ready. Upload new material from the upper form.";
+    setText(uploadStatus, "Ready. Upload new material from the upper form.");
   } catch (error) {
-    uploadStatus.textContent = `Session failed: ${error.message}`;
+    setText(uploadStatus, `Session failed: ${error.message}`);
     await showAlert("Login expired", "Please login again with a valid GitHub token.", "error");
     sessionStorage.removeItem(SESSION_TOKEN_KEY);
     sessionStorage.removeItem(SESSION_REPO_KEY);
@@ -325,7 +325,7 @@ function startEdit(index) {
   materialFormTitle.textContent = "Edit Material";
   uploadMaterialButton.textContent = "Save Changes";
   cancelEditButton.hidden = false;
-  uploadStatus.textContent = "Editing selected material. Choose a new file only if you want to replace the existing file.";
+  setText(uploadStatus, "Editing selected material. Choose a new file only if you want to replace the existing file.");
   materialTitle.focus();
 }
 
@@ -474,6 +474,10 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function setText(element, message) {
+  if (element) element.textContent = message;
 }
 
 loadPublicMaterials();
