@@ -6,6 +6,7 @@ const publicMaterialRows = document.querySelector("#publicMaterialRows");
 const materialList = document.querySelector("#materialList");
 
 const adminLoginButton = document.querySelector("#adminLogin");
+const adminLogoutLink = document.querySelector("#adminLogout");
 const uploadMaterialButton = document.querySelector("#uploadMaterial");
 const loginStatus = document.querySelector("#loginStatus");
 const uploadStatus = document.querySelector("#uploadStatus");
@@ -15,9 +16,11 @@ const materialSubject = document.querySelector("#materialSubject");
 const materialType = document.querySelector("#materialType");
 const materialTitle = document.querySelector("#materialTitle");
 const materialFile = document.querySelector("#materialFile");
-const materialUploadForm = document.querySelector("#materialUploadForm");
 const materialFormTitle = document.querySelector("#materialFormTitle");
 const cancelEditButton = document.querySelector("#cancelEdit");
+
+const SESSION_TOKEN_KEY = "myportfolioGithubToken";
+const SESSION_REPO_KEY = "myportfolioGithubRepo";
 
 const state = {
   token: "",
@@ -33,7 +36,7 @@ navToggle?.addEventListener("click", () => {
 });
 
 siteNav?.addEventListener("click", (event) => {
-  if (event.target.matches("a")) {
+  if (event.target.matches("a") && event.target.id !== "adminLogout") {
     siteNav.classList.remove("is-open");
     navToggle?.setAttribute("aria-expanded", "false");
   }
@@ -53,6 +56,142 @@ filters.forEach((filterButton) => {
 
     renderPublicMaterials(state.materials, selected);
   });
+});
+
+adminLoginButton?.addEventListener("click", async () => {
+  state.token = githubTokenInput.value.trim();
+  state.repo = githubRepoInput.value.trim() || "Jayna24/MyPortfolio";
+
+  if (!state.token) {
+    loginStatus.textContent = "Enter a GitHub token to continue.";
+    return;
+  }
+
+  loginStatus.textContent = "Checking GitHub access...";
+  try {
+    await githubApi(`repos/${state.repo}`);
+    sessionStorage.setItem(SESSION_TOKEN_KEY, state.token);
+    sessionStorage.setItem(SESSION_REPO_KEY, state.repo);
+    loginStatus.textContent = "Login successful. Opening material upload page...";
+    window.location.href = "materials-admin.html";
+  } catch (error) {
+    loginStatus.textContent = `Login failed: ${error.message}`;
+  }
+});
+
+adminLogoutLink?.addEventListener("click", () => {
+  sessionStorage.removeItem(SESSION_TOKEN_KEY);
+  sessionStorage.removeItem(SESSION_REPO_KEY);
+});
+
+uploadMaterialButton?.addEventListener("click", async () => {
+  const file = materialFile.files?.[0];
+  const title = materialTitle.value.trim();
+  const isEditing = state.editIndex !== null;
+
+  if (!file && !isEditing) {
+    uploadStatus.textContent = "Choose a file first.";
+    return;
+  }
+
+  if (!title) {
+    uploadStatus.textContent = "Enter a material title.";
+    return;
+  }
+
+  uploadMaterialButton.disabled = true;
+  uploadStatus.textContent = isEditing ? "Saving material changes..." : "Uploading file to GitHub...";
+
+  try {
+    const previousItem = isEditing ? state.materials[state.editIndex] : null;
+    let repoPath = previousItem?.path || "";
+    let fileName = previousItem?.fileName || "";
+    let url = previousItem?.url || "";
+
+    if (file) {
+      const safeSubject = slugify(materialSubject.value);
+      const safeName = `${Date.now()}-${slugify(file.name)}`;
+      repoPath = `materials/${safeSubject}/${safeName}`;
+      const content = await fileToBase64(file);
+
+      await writeGitHubFile(repoPath, content, `Upload ${file.name}`);
+      fileName = file.name;
+      url = repoPath;
+
+      if (previousItem?.path && previousItem.path !== repoPath) {
+        await deleteGitHubFile(previousItem.path, `Delete replaced material ${previousItem.fileName || previousItem.path}`, true);
+      }
+    }
+
+    const item = {
+      id: previousItem?.id || String(Date.now()),
+      subject: materialSubject.value,
+      title,
+      type: materialType.value,
+      fileName,
+      path: repoPath,
+      url,
+      uploadedAt: previousItem?.uploadedAt || new Date().toISOString().slice(0, 10),
+      updatedAt: new Date().toISOString().slice(0, 10)
+    };
+
+    if (isEditing) {
+      state.materials[state.editIndex] = item;
+    } else {
+      state.materials = [item, ...state.materials];
+    }
+
+    await writeMaterialsJson();
+    renderAdminMaterials();
+    resetMaterialForm();
+    uploadStatus.textContent = "Saved. GitHub Pages will show the update after deployment finishes.";
+    await showAlert("Saved", "Material information has been saved successfully.", "success");
+  } catch (error) {
+    uploadStatus.textContent = `Save failed: ${error.message}`;
+    await showAlert("Save failed", error.message, "error");
+  } finally {
+    uploadMaterialButton.disabled = false;
+  }
+});
+
+materialList?.addEventListener("click", async (event) => {
+  const button = event.target.closest("button[data-action]");
+  if (!button) return;
+
+  const index = Number(button.dataset.index);
+  const item = state.materials[index];
+  if (!item) return;
+
+  if (button.dataset.action === "edit") {
+    startEdit(index);
+    return;
+  }
+
+  if (button.dataset.action === "delete") {
+    const confirmed = await confirmDelete(item.title);
+    if (!confirmed) return;
+
+    uploadStatus.textContent = "Deleting material...";
+    try {
+      if (item.path) {
+        await deleteGitHubFile(item.path, `Delete material ${item.fileName || item.title}`, true);
+      }
+      state.materials.splice(index, 1);
+      await writeMaterialsJson();
+      renderAdminMaterials();
+      resetMaterialForm();
+      uploadStatus.textContent = "Deleted. GitHub Pages will update after deployment finishes.";
+      await showAlert("Deleted", "Material has been removed.", "success");
+    } catch (error) {
+      uploadStatus.textContent = `Delete failed: ${error.message}`;
+      await showAlert("Delete failed", error.message, "error");
+    }
+  }
+});
+
+cancelEditButton?.addEventListener("click", () => {
+  resetMaterialForm();
+  uploadStatus.textContent = "Edit cancelled.";
 });
 
 function subjectGroup(subject) {
@@ -117,6 +256,32 @@ async function loadPublicMaterials() {
   }
 }
 
+async function initMaterialsAdmin() {
+  if (!document.querySelector("#materialUploadForm")) return;
+
+  state.token = sessionStorage.getItem(SESSION_TOKEN_KEY) || "";
+  state.repo = sessionStorage.getItem(SESSION_REPO_KEY) || "Jayna24/MyPortfolio";
+
+  if (!state.token) {
+    window.location.href = "admin-login.html";
+    return;
+  }
+
+  uploadStatus.textContent = "Loading uploaded materials...";
+  try {
+    await githubApi(`repos/${state.repo}`);
+    state.materials = await readMaterialsFromGitHub();
+    renderAdminMaterials();
+    uploadStatus.textContent = "Ready. Upload new material from the upper form.";
+  } catch (error) {
+    uploadStatus.textContent = `Session failed: ${error.message}`;
+    await showAlert("Login expired", "Please login again with a valid GitHub token.", "error");
+    sessionStorage.removeItem(SESSION_TOKEN_KEY);
+    sessionStorage.removeItem(SESSION_REPO_KEY);
+    window.location.href = "admin-login.html";
+  }
+}
+
 function renderAdminMaterials() {
   if (!materialList) return;
   if (!state.materials.length) {
@@ -124,162 +289,31 @@ function renderAdminMaterials() {
     return;
   }
 
-  materialList.innerHTML = state.materials.map((item) => {
-    const index = state.materials.indexOf(item);
-    const link = item.url ? `<a href="${item.url}" target="_blank" rel="noopener">Open</a>` : "<span>No file link</span>";
-    return `
-      <article class="admin-material-item">
-        <div>
-          <strong>${escapeHtml(item.title)}</strong>
-          <span>${escapeHtml(item.subject)} | ${escapeHtml(item.type)} | ${escapeHtml(item.uploadedAt || "No date")}</span>
-          <span>${escapeHtml(item.fileName || "No file name")}</span>
+  materialList.innerHTML = `
+    <div class="admin-grid-row admin-grid-head">
+      <span>Title</span>
+      <span>Subject</span>
+      <span>Type</span>
+      <span>File</span>
+      <span>Actions</span>
+    </div>
+    ${state.materials.map((item, index) => {
+      const link = item.url ? `<a href="${item.url}" target="_blank" rel="noopener">Open</a>` : "<span>No file</span>";
+      return `
+        <div class="admin-grid-row">
+          <span>${escapeHtml(item.title)}</span>
+          <span>${escapeHtml(item.subject)}</span>
+          <span>${escapeHtml(item.type)}</span>
+          <span>${link}</span>
+          <span class="admin-actions">
+            <button class="button neutral" type="button" data-action="edit" data-index="${index}">Edit</button>
+            <button class="button danger" type="button" data-action="delete" data-index="${index}">Delete</button>
+          </span>
         </div>
-        <div class="admin-actions">
-          ${link}
-          <button class="button neutral" type="button" data-action="edit" data-index="${index}">Edit</button>
-          <button class="button danger" type="button" data-action="delete" data-index="${index}">Delete</button>
-        </div>
-      </article>
-    `;
-  }).join("");
+      `;
+    }).join("")}
+  `;
 }
-
-function setUploadEnabled(enabled) {
-  materialUploadForm?.classList.toggle("is-disabled", !enabled);
-  [materialSubject, materialType, materialTitle, materialFile, uploadMaterialButton].forEach((control) => {
-    if (control) control.disabled = !enabled;
-  });
-}
-
-adminLoginButton?.addEventListener("click", async () => {
-  state.token = githubTokenInput.value.trim();
-  state.repo = githubRepoInput.value.trim() || "Jayna24/MyPortfolio";
-
-  if (!state.token) {
-    loginStatus.textContent = "Enter a GitHub token to continue.";
-    return;
-  }
-
-  loginStatus.textContent = "Checking GitHub access...";
-  try {
-    await githubApi(`repos/${state.repo}`);
-    state.materials = await readMaterialsFromGitHub();
-    renderAdminMaterials();
-    setUploadEnabled(true);
-    resetMaterialForm();
-    loginStatus.textContent = "Connected. You can upload materials now.";
-    uploadStatus.textContent = "Choose a file and upload it to GitHub.";
-  } catch (error) {
-    setUploadEnabled(false);
-    loginStatus.textContent = `Login failed: ${error.message}`;
-  }
-});
-
-uploadMaterialButton?.addEventListener("click", async () => {
-  const file = materialFile.files?.[0];
-  const title = materialTitle.value.trim();
-  const isEditing = state.editIndex !== null;
-
-  if (!file && !isEditing) {
-    uploadStatus.textContent = "Choose a file first.";
-    return;
-  }
-
-  if (!title) {
-    uploadStatus.textContent = "Enter a material title.";
-    return;
-  }
-
-  uploadMaterialButton.disabled = true;
-  uploadStatus.textContent = isEditing ? "Saving material changes..." : "Uploading file to GitHub...";
-
-  try {
-    const previousItem = isEditing ? state.materials[state.editIndex] : null;
-    let repoPath = previousItem?.path || "";
-    let fileName = previousItem?.fileName || "";
-    let url = previousItem?.url || "";
-
-    if (file) {
-      const safeSubject = slugify(materialSubject.value);
-      const safeName = `${Date.now()}-${slugify(file.name)}`;
-      repoPath = `materials/${safeSubject}/${safeName}`;
-      const content = await fileToBase64(file);
-
-      await writeGitHubFile(repoPath, content, `Upload ${file.name}`);
-      fileName = file.name;
-      url = repoPath;
-
-      if (previousItem?.path && previousItem.path !== repoPath) {
-        await deleteGitHubFile(previousItem.path, `Delete replaced material ${previousItem.fileName || previousItem.path}`, true);
-      }
-    }
-
-    const item = {
-      id: previousItem?.id || String(Date.now()),
-      subject: materialSubject.value,
-      title,
-      type: materialType.value,
-      fileName,
-      path: repoPath,
-      url,
-      uploadedAt: previousItem?.uploadedAt || new Date().toISOString().slice(0, 10),
-      updatedAt: new Date().toISOString().slice(0, 10)
-    };
-
-    if (isEditing) {
-      state.materials[state.editIndex] = item;
-    } else {
-      state.materials = [item, ...state.materials];
-    }
-
-    await writeMaterialsJson();
-    renderAdminMaterials();
-    resetMaterialForm();
-    uploadStatus.textContent = "Saved. GitHub Pages will show the update after deployment finishes.";
-  } catch (error) {
-    uploadStatus.textContent = `Save failed: ${error.message}`;
-  } finally {
-    uploadMaterialButton.disabled = false;
-  }
-});
-
-materialList?.addEventListener("click", async (event) => {
-  const button = event.target.closest("button[data-action]");
-  if (!button) return;
-
-  const index = Number(button.dataset.index);
-  const item = state.materials[index];
-  if (!item) return;
-
-  if (button.dataset.action === "edit") {
-    startEdit(index);
-    return;
-  }
-
-  if (button.dataset.action === "delete") {
-    const confirmed = window.confirm(`Are you sure you want to delete "${item.title}"? This will remove it from the public material list.`);
-    if (!confirmed) return;
-
-    uploadStatus.textContent = "Deleting material...";
-    try {
-      if (item.path) {
-        await deleteGitHubFile(item.path, `Delete material ${item.fileName || item.title}`, true);
-      }
-      state.materials.splice(index, 1);
-      await writeMaterialsJson();
-      renderAdminMaterials();
-      resetMaterialForm();
-      uploadStatus.textContent = "Deleted. GitHub Pages will update after deployment finishes.";
-    } catch (error) {
-      uploadStatus.textContent = `Delete failed: ${error.message}`;
-    }
-  }
-});
-
-cancelEditButton?.addEventListener("click", () => {
-  resetMaterialForm();
-  uploadStatus.textContent = "Edit cancelled.";
-});
 
 function startEdit(index) {
   const item = state.materials[index];
@@ -381,6 +415,30 @@ async function githubApi(endpoint, options = {}) {
   return response.json();
 }
 
+async function confirmDelete(title) {
+  if (window.Swal) {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: `Delete "${title}" from uploaded materials?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#b42318",
+      cancelButtonColor: "#0f766e",
+      confirmButtonText: "Yes, delete",
+      cancelButtonText: "Cancel"
+    });
+    return result.isConfirmed;
+  }
+
+  return window.confirm(`Are you sure you want to delete "${title}"?`);
+}
+
+async function showAlert(title, text, icon) {
+  if (window.Swal) {
+    await Swal.fire({ title, text, icon, confirmButtonColor: "#0f766e" });
+  }
+}
+
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -419,3 +477,4 @@ function escapeHtml(value) {
 }
 
 loadPublicMaterials();
+initMaterialsAdmin();

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Login | Dr. Jayna Donga Materials</title>
+    <meta name="description" content="Admin login page for Dr. Jayna Donga material management.">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Back to portfolio">
+        <span class="brand-mark">JD</span>
+        <span>
+          <strong>Dr. Jayna Donga</strong>
+          <small>Admin Login</small>
+        </span>
+      </a>
+      <nav class="site-nav admin-nav" aria-label="Admin navigation">
+        <a href="index.html">Public Site</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="section admin-panel">
+        <div class="section-heading">
+          <p class="eyebrow">Admin Login</p>
+          <h1>Material Management Login</h1>
+        </div>
+        <div class="admin-note">
+          <p>Login with a fine-grained GitHub token for `Jayna24/MyPortfolio`. The token is kept only in this browser session and is not saved in the website code.</p>
+        </div>
+        <form class="upload-form admin-login-card" id="adminLoginForm">
+          <label>
+            GitHub Token
+            <input id="githubToken" type="password" autocomplete="off" placeholder="Paste GitHub token here">
+          </label>
+          <label>
+            Repository
+            <input id="githubRepo" type="text" value="Jayna24/MyPortfolio">
+          </label>
+          <button class="button primary" type="button" id="adminLogin">Login</button>
+          <p class="form-status" id="loginStatus">Not connected.</p>
+        </form>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

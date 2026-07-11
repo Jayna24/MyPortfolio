@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Material Upload | Dr. Jayna Donga</title>
+    <meta name="description" content="Upload, edit, and delete subject-wise materials.">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Back to portfolio">
+        <span class="brand-mark">JD</span>
+        <span>
+          <strong>Dr. Jayna Donga</strong>
+          <small>Material Admin</small>
+        </span>
+      </a>
+      <nav class="site-nav admin-nav" aria-label="Admin navigation">
+        <a href="index.html">Public Site</a>
+        <a href="admin-login.html" id="adminLogout">Logout</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="section admin-panel">
+        <div class="section-heading">
+          <p class="eyebrow">Admin Side</p>
+          <h1>Upload Subject Material</h1>
+        </div>
+        <div class="admin-note">
+          <p>Upper side is for uploading/editing material. Bottom side shows all uploaded material in a grid with Edit and Delete actions. Public students see only published downloadable material.</p>
+        </div>
+
+        <form class="upload-form admin-upload-panel" id="materialUploadForm">
+          <h3 id="materialFormTitle">Upload New Material</h3>
+          <div class="admin-form-grid">
+            <label>
+              Subject
+              <select id="materialSubject" name="subject">
+                <option>Operating Systems</option>
+                <option>Distributed Computing</option>
+                <option>C Programming</option>
+                <option>Data Structures</option>
+                <option>Compiler Design</option>
+                <option>Computer Graphics</option>
+                <option>UML</option>
+              </select>
+            </label>
+            <label>
+              Material Type
+              <select id="materialType" name="type">
+                <option>Lecture Notes</option>
+                <option>Assignment</option>
+                <option>Question Bank</option>
+                <option>Lab Manual</option>
+                <option>Presentation</option>
+                <option>Reference Link</option>
+              </select>
+            </label>
+            <label>
+              Title
+              <input id="materialTitle" type="text" name="title" placeholder="Example: Unit 1 Process Scheduling Notes">
+            </label>
+            <label>
+              Material File
+              <input id="materialFile" type="file">
+            </label>
+          </div>
+          <div class="admin-form-actions">
+            <button class="button primary" type="button" id="uploadMaterial">Upload To GitHub</button>
+            <button class="button neutral" type="button" id="cancelEdit" hidden>Cancel Edit</button>
+          </div>
+          <p class="form-status" id="uploadStatus">Loading admin session...</p>
+        </form>
+
+        <div class="upload-list admin-list">
+          <h3>Uploaded Materials</h3>
+          <p>Edit or delete uploaded material from here. Delete will show a confirmation alert before removing anything.</p>
+          <div class="admin-grid-view" id="materialList">
+            <p>Loading current materials...</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

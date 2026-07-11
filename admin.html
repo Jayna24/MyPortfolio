@@ -3,96 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Login | Dr. Jayna Donga Materials</title>
-    <meta name="description" content="Admin page for uploading subject-wise materials to GitHub.">
+    <meta http-equiv="refresh" content="0; url=admin-login.html">
+    <title>Redirecting | Admin</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="index.html" aria-label="Back to portfolio">
-        <span class="brand-mark">JD</span>
-        <span>
-          <strong>Dr. Jayna Donga</strong>
-          <small>Admin Materials</small>
-        </span>
-      </a>
-      <nav class="site-nav admin-nav" aria-label="Admin navigation">
-        <a href="index.html">Public Site</a>
-      </nav>
-    </header>
-
-    <main>
-      <section class="section admin-panel">
-        <div class="section-heading">
-          <p class="eyebrow">Admin Login</p>
-          <h1>GitHub Material Upload</h1>
-        </div>
-        <div class="admin-note">
-          <p>This admin page uploads files directly into the `Jayna24/MyPortfolio` GitHub repository and updates the public material list. Use a fine-grained GitHub token with Contents read/write access for this repository. The token stays in this browser session and is not saved in the website code.</p>
-        </div>
-        <div class="upload-grid">
-          <form class="upload-form" id="adminLoginForm">
-            <label>
-              GitHub Token
-              <input id="githubToken" type="password" autocomplete="off" placeholder="Paste token only in the browser">
-            </label>
-            <label>
-              Repository
-              <input id="githubRepo" type="text" value="Jayna24/MyPortfolio">
-            </label>
-            <button class="button primary" type="button" id="adminLogin">Login To Admin</button>
-            <p class="form-status" id="loginStatus">Not connected.</p>
-          </form>
-
-          <form class="upload-form is-disabled" id="materialUploadForm">
-            <h3 id="materialFormTitle">Upload New Material</h3>
-            <label>
-              Subject
-              <select id="materialSubject" name="subject" disabled>
-                <option>Operating Systems</option>
-                <option>Distributed Computing</option>
-                <option>C Programming</option>
-                <option>Data Structures</option>
-                <option>Compiler Design</option>
-                <option>Computer Graphics</option>
-                <option>UML</option>
-              </select>
-            </label>
-            <label>
-              Material Type
-              <select id="materialType" name="type" disabled>
-                <option>Lecture Notes</option>
-                <option>Assignment</option>
-                <option>Question Bank</option>
-                <option>Lab Manual</option>
-                <option>Presentation</option>
-                <option>Reference Link</option>
-              </select>
-            </label>
-            <label>
-              Title
-              <input id="materialTitle" type="text" name="title" placeholder="Example: Unit 1 Process Scheduling Notes" disabled>
-            </label>
-            <label>
-              Material File
-              <input id="materialFile" type="file" disabled>
-            </label>
-            <button class="button primary" type="button" id="uploadMaterial" disabled>Upload To GitHub</button>
-            <button class="button neutral" type="button" id="cancelEdit" hidden>Cancel Edit</button>
-            <p class="form-status" id="uploadStatus">Login first, then upload material.</p>
-          </form>
-        </div>
-
-        <div class="upload-list admin-list">
-          <h3>Uploaded Materials</h3>
-          <p>Edit or delete uploaded material from here. Deleting asks for confirmation and also removes the uploaded file from GitHub when the file path is available.</p>
-          <div class="admin-material-list" id="materialList">
-            <p>Login to load current materials.</p>
-          </div>
-        </div>
-      </section>
+    <main class="section admin-panel">
+      <p>Redirecting to <a href="admin-login.html">Admin Login</a>...</p>
     </main>
-
-    <script src="script.js"></script>
   </body>
 </html>
