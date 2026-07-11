@@ -16,12 +16,15 @@ const materialType = document.querySelector("#materialType");
 const materialTitle = document.querySelector("#materialTitle");
 const materialFile = document.querySelector("#materialFile");
 const materialUploadForm = document.querySelector("#materialUploadForm");
+const materialFormTitle = document.querySelector("#materialFormTitle");
+const cancelEditButton = document.querySelector("#cancelEdit");
 
 const state = {
   token: "",
   repo: "Jayna24/MyPortfolio",
   branch: "main",
-  materials: []
+  materials: [],
+  editIndex: null
 };
 
 navToggle?.addEventListener("click", () => {
@@ -117,13 +120,27 @@ async function loadPublicMaterials() {
 function renderAdminMaterials() {
   if (!materialList) return;
   if (!state.materials.length) {
-    materialList.innerHTML = "<li>No materials published yet.</li>";
+    materialList.innerHTML = "<p>No materials published yet.</p>";
     return;
   }
 
   materialList.innerHTML = state.materials.map((item) => {
-    const link = item.url ? ` - <a href="${item.url}" target="_blank" rel="noopener">Open</a>` : "";
-    return `<li><strong>${escapeHtml(item.subject)}:</strong> ${escapeHtml(item.title)} (${escapeHtml(item.type)})${link}</li>`;
+    const index = state.materials.indexOf(item);
+    const link = item.url ? `<a href="${item.url}" target="_blank" rel="noopener">Open</a>` : "<span>No file link</span>";
+    return `
+      <article class="admin-material-item">
+        <div>
+          <strong>${escapeHtml(item.title)}</strong>
+          <span>${escapeHtml(item.subject)} | ${escapeHtml(item.type)} | ${escapeHtml(item.uploadedAt || "No date")}</span>
+          <span>${escapeHtml(item.fileName || "No file name")}</span>
+        </div>
+        <div class="admin-actions">
+          ${link}
+          <button class="button neutral" type="button" data-action="edit" data-index="${index}">Edit</button>
+          <button class="button danger" type="button" data-action="delete" data-index="${index}">Delete</button>
+        </div>
+      </article>
+    `;
   }).join("");
 }
 
@@ -149,6 +166,7 @@ adminLoginButton?.addEventListener("click", async () => {
     state.materials = await readMaterialsFromGitHub();
     renderAdminMaterials();
     setUploadEnabled(true);
+    resetMaterialForm();
     loginStatus.textContent = "Connected. You can upload materials now.";
     uploadStatus.textContent = "Choose a file and upload it to GitHub.";
   } catch (error) {
@@ -160,8 +178,9 @@ adminLoginButton?.addEventListener("click", async () => {
 uploadMaterialButton?.addEventListener("click", async () => {
   const file = materialFile.files?.[0];
   const title = materialTitle.value.trim();
+  const isEditing = state.editIndex !== null;
 
-  if (!file) {
+  if (!file && !isEditing) {
     uploadStatus.textContent = "Choose a file first.";
     return;
   }
@@ -172,38 +191,118 @@ uploadMaterialButton?.addEventListener("click", async () => {
   }
 
   uploadMaterialButton.disabled = true;
-  uploadStatus.textContent = "Uploading file to GitHub...";
+  uploadStatus.textContent = isEditing ? "Saving material changes..." : "Uploading file to GitHub...";
 
   try {
-    const safeSubject = slugify(materialSubject.value);
-    const safeName = `${Date.now()}-${slugify(file.name)}`;
-    const repoPath = `materials/${safeSubject}/${safeName}`;
-    const content = await fileToBase64(file);
+    const previousItem = isEditing ? state.materials[state.editIndex] : null;
+    let repoPath = previousItem?.path || "";
+    let fileName = previousItem?.fileName || "";
+    let url = previousItem?.url || "";
 
-    await writeGitHubFile(repoPath, content, `Upload ${file.name}`);
+    if (file) {
+      const safeSubject = slugify(materialSubject.value);
+      const safeName = `${Date.now()}-${slugify(file.name)}`;
+      repoPath = `materials/${safeSubject}/${safeName}`;
+      const content = await fileToBase64(file);
+
+      await writeGitHubFile(repoPath, content, `Upload ${file.name}`);
+      fileName = file.name;
+      url = repoPath;
+
+      if (previousItem?.path && previousItem.path !== repoPath) {
+        await deleteGitHubFile(previousItem.path, `Delete replaced material ${previousItem.fileName || previousItem.path}`, true);
+      }
+    }
 
     const item = {
+      id: previousItem?.id || String(Date.now()),
       subject: materialSubject.value,
       title,
       type: materialType.value,
-      fileName: file.name,
+      fileName,
       path: repoPath,
-      url: repoPath,
-      uploadedAt: new Date().toISOString().slice(0, 10)
+      url,
+      uploadedAt: previousItem?.uploadedAt || new Date().toISOString().slice(0, 10),
+      updatedAt: new Date().toISOString().slice(0, 10)
     };
 
-    state.materials = [item, ...state.materials];
+    if (isEditing) {
+      state.materials[state.editIndex] = item;
+    } else {
+      state.materials = [item, ...state.materials];
+    }
+
     await writeMaterialsJson();
     renderAdminMaterials();
-    materialTitle.value = "";
-    materialFile.value = "";
-    uploadStatus.textContent = "Uploaded. GitHub Pages will show it publicly after the deployment finishes.";
+    resetMaterialForm();
+    uploadStatus.textContent = "Saved. GitHub Pages will show the update after deployment finishes.";
   } catch (error) {
-    uploadStatus.textContent = `Upload failed: ${error.message}`;
+    uploadStatus.textContent = `Save failed: ${error.message}`;
   } finally {
     uploadMaterialButton.disabled = false;
   }
 });
+
+materialList?.addEventListener("click", async (event) => {
+  const button = event.target.closest("button[data-action]");
+  if (!button) return;
+
+  const index = Number(button.dataset.index);
+  const item = state.materials[index];
+  if (!item) return;
+
+  if (button.dataset.action === "edit") {
+    startEdit(index);
+    return;
+  }
+
+  if (button.dataset.action === "delete") {
+    const confirmed = window.confirm(`Are you sure you want to delete "${item.title}"? This will remove it from the public material list.`);
+    if (!confirmed) return;
+
+    uploadStatus.textContent = "Deleting material...";
+    try {
+      if (item.path) {
+        await deleteGitHubFile(item.path, `Delete material ${item.fileName || item.title}`, true);
+      }
+      state.materials.splice(index, 1);
+      await writeMaterialsJson();
+      renderAdminMaterials();
+      resetMaterialForm();
+      uploadStatus.textContent = "Deleted. GitHub Pages will update after deployment finishes.";
+    } catch (error) {
+      uploadStatus.textContent = `Delete failed: ${error.message}`;
+    }
+  }
+});
+
+cancelEditButton?.addEventListener("click", () => {
+  resetMaterialForm();
+  uploadStatus.textContent = "Edit cancelled.";
+});
+
+function startEdit(index) {
+  const item = state.materials[index];
+  state.editIndex = index;
+  materialSubject.value = item.subject || "Operating Systems";
+  materialType.value = item.type || "Lecture Notes";
+  materialTitle.value = item.title || "";
+  materialFile.value = "";
+  materialFormTitle.textContent = "Edit Material";
+  uploadMaterialButton.textContent = "Save Changes";
+  cancelEditButton.hidden = false;
+  uploadStatus.textContent = "Editing selected material. Choose a new file only if you want to replace the existing file.";
+  materialTitle.focus();
+}
+
+function resetMaterialForm() {
+  state.editIndex = null;
+  if (materialTitle) materialTitle.value = "";
+  if (materialFile) materialFile.value = "";
+  if (materialFormTitle) materialFormTitle.textContent = "Upload New Material";
+  if (uploadMaterialButton) uploadMaterialButton.textContent = "Upload To GitHub";
+  if (cancelEditButton) cancelEditButton.hidden = true;
+}
 
 async function readMaterialsFromGitHub() {
   try {
@@ -232,6 +331,23 @@ async function writeGitHubFile(path, base64Content, message, sha = null) {
   return githubApi(`repos/${state.repo}/contents/${encodePath(path)}`, {
     method: "PUT",
     body: JSON.stringify(payload)
+  });
+}
+
+async function deleteGitHubFile(path, message, ignoreMissing = false) {
+  const sha = await getFileSha(path);
+  if (!sha) {
+    if (ignoreMissing) return null;
+    throw new Error(`File not found: ${path}`);
+  }
+
+  return githubApi(`repos/${state.repo}/contents/${encodePath(path)}`, {
+    method: "DELETE",
+    body: JSON.stringify({
+      message,
+      sha,
+      branch: state.branch
+    })
   });
 }
 

@@ -45,6 +45,7 @@
           </form>
 
           <form class="upload-form is-disabled" id="materialUploadForm">
+            <h3 id="materialFormTitle">Upload New Material</h3>
             <label>
               Subject
               <select id="materialSubject" name="subject" disabled>
@@ -77,16 +78,17 @@
               <input id="materialFile" type="file" disabled>
             </label>
             <button class="button primary" type="button" id="uploadMaterial" disabled>Upload To GitHub</button>
+            <button class="button neutral" type="button" id="cancelEdit" hidden>Cancel Edit</button>
             <p class="form-status" id="uploadStatus">Login first, then upload material.</p>
           </form>
         </div>
 
         <div class="upload-list admin-list">
-          <h3>Published Material List</h3>
-          <p>After upload, the public Materials section will show the uploaded file after GitHub Pages finishes deploying.</p>
-          <ul id="materialList">
-            <li>Login to load current materials.</li>
-          </ul>
+          <h3>Uploaded Materials</h3>
+          <p>Edit or delete uploaded material from here. Deleting asks for confirmation and also removes the uploaded file from GitHub when the file path is available.</p>
+          <div class="admin-material-list" id="materialList">
+            <p>Login to load current materials.</p>
+          </div>
         </div>
       </section>
     </main>
