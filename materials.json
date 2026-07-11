@@ -884,42 +884,6 @@
   },
   {
     "subject": "Operating Systems",
-    "title": "Unit-5 (Memory Management)",
-    "type": "Presentation",
-    "fileName": "Virtual Memory.pptx",
-    "path": "materials/operating-systems/1783703588512-virtual-memory.pptx",
-    "url": "materials/operating-systems/1783703588512-virtual-memory.pptx",
-    "uploadedAt": "2026-07-10"
-  },
-  {
-    "subject": "Operating Systems",
-    "title": "Unit-5 (Memory Management)",
-    "type": "Presentation",
-    "fileName": "Virtual Memory.pptx",
-    "path": "materials/operating-systems/1783703564430-virtual-memory.pptx",
-    "url": "materials/operating-systems/1783703564430-virtual-memory.pptx",
-    "uploadedAt": "2026-07-10"
-  },
-  {
-    "subject": "Operating Systems",
-    "title": "Unit-4 (Dead Lock Management)",
-    "type": "Presentation",
-    "fileName": "Deadlock Management.pptx",
-    "path": "materials/operating-systems/1783703487374-deadlock-management.pptx",
-    "url": "materials/operating-systems/1783703487374-deadlock-management.pptx",
-    "uploadedAt": "2026-07-10"
-  },
-  {
-    "subject": "Operating Systems",
-    "title": "Unit-3 (Inter Process Communication)",
-    "type": "Presentation",
-    "fileName": "Interprocess Communication.pptx",
-    "path": "materials/operating-systems/1783703440908-interprocess-communication.pptx",
-    "url": "materials/operating-systems/1783703440908-interprocess-communication.pptx",
-    "uploadedAt": "2026-07-10"
-  },
-  {
-    "subject": "Operating Systems",
     "title": "Unit-2 (Process-Thread management)",
     "type": "Presentation",
     "fileName": "Process -Thread-Management.pptx",
