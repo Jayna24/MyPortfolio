@@ -376,6 +376,15 @@
     "uploadedAt": "2026-07-11"
   },
   {
+    "subject": "Data Structures",
+    "title": "Unit-4 (Sorting and Searching)",
+    "type": "Presentation",
+    "fileName": "Sorting-Searching-and-Hashing.pptx",
+    "path": "materials/data-structures/1783705386088-sorting-searching-and-hashing.pptx",
+    "url": "materials/data-structures/1783705386088-sorting-searching-and-hashing.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
     "subject": "Operating Systems",
     "title": "Unit-4",
     "type": "Lecture Notes",
@@ -419,15 +428,6 @@
     "path": "materials/operating-systems/1783744323810-os-unit-i.pdf",
     "url": "materials/operating-systems/1783744323810-os-unit-i.pdf",
     "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Data Structures",
-    "title": "Unit-4 (Sorting and Searching)",
-    "type": "Presentation",
-    "fileName": "Sorting-Searching-and-Hashing.pptx",
-    "path": "materials/data-structures/1783705386088-sorting-searching-and-hashing.pptx",
-    "url": "materials/data-structures/1783705386088-sorting-searching-and-hashing.pptx",
-    "uploadedAt": "2026-07-10"
   },
   {
     "subject": "Data Structures",
