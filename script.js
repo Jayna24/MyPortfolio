@@ -136,13 +136,20 @@ uploadMaterialButton?.addEventListener("click", async () => {
       updatedAt: new Date().toISOString().slice(0, 10)
     };
 
-    if (isEditing) {
-      state.materials[state.editIndex] = item;
-    } else {
-      state.materials = [item, ...state.materials];
-    }
-
-    await writeMaterialsJson();
+    const savedMaterials = await mutateLatestMaterials((latestMaterials) => {
+      if (isEditing) {
+        const latestIndex = findMaterialIndex(latestMaterials, previousItem);
+        if (latestIndex === -1) {
+          latestMaterials.unshift(item);
+        } else {
+          latestMaterials[latestIndex] = item;
+        }
+      } else {
+        latestMaterials.unshift(item);
+      }
+      return latestMaterials;
+    });
+    state.materials = savedMaterials;
     renderAdminMaterials();
     resetMaterialForm();
     setText(uploadStatus, "Saved. GitHub Pages will show the update after deployment finishes.");
@@ -177,8 +184,12 @@ materialList?.addEventListener("click", async (event) => {
       if (item.path) {
         await deleteGitHubFile(item.path, `Delete material ${item.fileName || item.title}`, true);
       }
-      state.materials.splice(index, 1);
-      await writeMaterialsJson();
+      const savedMaterials = await mutateLatestMaterials((latestMaterials) => {
+        const latestIndex = findMaterialIndex(latestMaterials, item);
+        if (latestIndex !== -1) latestMaterials.splice(latestIndex, 1);
+        return latestMaterials;
+      });
+      state.materials = savedMaterials;
       renderAdminMaterials();
       resetMaterialForm();
       setText(uploadStatus, "Deleted. GitHub Pages will update after deployment finishes.");
@@ -341,20 +352,54 @@ function resetMaterialForm() {
 }
 
 async function readMaterialsFromGitHub() {
+  const result = await readMaterialsDocumentFromGitHub();
+  return result.materials;
+}
+
+async function readMaterialsDocumentFromGitHub() {
   try {
     const data = await githubApi(`repos/${state.repo}/contents/materials.json?ref=${state.branch}`);
     const json = decodeBase64Utf8(data.content || "");
-    return JSON.parse(json);
+    return {
+      materials: JSON.parse(json),
+      sha: data.sha
+    };
   } catch (error) {
-    if (error.message.includes("404")) return [];
+    if (error.message.includes("404")) return { materials: [], sha: null };
     throw error;
   }
 }
 
 async function writeMaterialsJson() {
-  const existing = await getFileSha("materials.json");
+  const document = await readMaterialsDocumentFromGitHub();
+  const existing = document.sha;
   const content = encodeBase64Utf8(JSON.stringify(state.materials, null, 2));
   await writeGitHubFile("materials.json", content, "Update published materials", existing);
+}
+
+async function mutateLatestMaterials(mutator, attempt = 1) {
+  const document = await readMaterialsDocumentFromGitHub();
+  const nextMaterials = mutator([...document.materials]);
+  const content = encodeBase64Utf8(JSON.stringify(nextMaterials, null, 2));
+
+  try {
+    await writeGitHubFile("materials.json", content, "Update published materials", document.sha);
+    return nextMaterials;
+  } catch (error) {
+    if (attempt < 3 && isConflictError(error)) {
+      return mutateLatestMaterials(mutator, attempt + 1);
+    }
+    throw error;
+  }
+}
+
+function findMaterialIndex(materials, target) {
+  if (!target) return -1;
+  return materials.findIndex((item) =>
+    (target.id && item.id === target.id) ||
+    (target.path && item.path === target.path) ||
+    (item.title === target.title && item.subject === target.subject && item.type === target.type)
+  );
 }
 
 async function writeGitHubFile(path, base64Content, message, sha = null) {
@@ -427,6 +472,10 @@ function verifyRepositoryWriteAccess(repoData) {
 }
 
 function formatGitHubError(status, message) {
+  if (status === 409) {
+    return "GitHub reported a content conflict because materials were changed recently. The page refreshes the latest list and retries automatically; if this message remains, please try again once.";
+  }
+
   if (status === 403 && message.includes("Resource not accessible by personal access token")) {
     return "GitHub refused this action because the token does not have Contents: Read and write permission for Jayna24/MyPortfolio. Edit or recreate the token with Repository permissions -> Contents: Read and write, then login again.";
   }
@@ -436,6 +485,10 @@ function formatGitHubError(status, message) {
   }
 
   return `${status} ${message}`;
+}
+
+function isConflictError(error) {
+  return String(error.message || "").includes("409");
 }
 
 async function confirmDelete(title) {
