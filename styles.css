@@ -540,7 +540,7 @@ address,
 
 .admin-grid-row {
   display: grid;
-  grid-template-columns: 1.25fr 1fr 0.9fr 0.75fr 1.1fr;
+  grid-template-columns: 82px 1.25fr 1fr 0.9fr 0.75fr 1.1fr;
   gap: 1px;
   align-items: center;
   border-top: 1px solid var(--line);
@@ -567,6 +567,25 @@ address,
   color: var(--teal-dark);
   font-weight: 900;
   text-decoration: none;
+}
+
+.admin-grid-row[draggable="true"] {
+  cursor: grab;
+}
+
+.admin-grid-row.is-dragging {
+  opacity: 0.48;
+}
+
+.admin-grid-row.is-drag-over {
+  outline: 3px solid rgba(15, 118, 110, 0.35);
+  outline-offset: -3px;
+}
+
+.drag-cell {
+  color: var(--teal-dark) !important;
+  font-weight: 900;
+  cursor: grab;
 }
 
 .admin-actions {

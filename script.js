@@ -201,6 +201,43 @@ materialList?.addEventListener("click", async (event) => {
   }
 });
 
+materialList?.addEventListener("dragstart", (event) => {
+  const row = event.target.closest(".admin-grid-row[data-index]");
+  if (!row) return;
+  row.classList.add("is-dragging");
+  event.dataTransfer.effectAllowed = "move";
+  event.dataTransfer.setData("text/plain", row.dataset.index);
+});
+
+materialList?.addEventListener("dragover", (event) => {
+  const row = event.target.closest(".admin-grid-row[data-index]");
+  if (!row) return;
+  event.preventDefault();
+  row.classList.add("is-drag-over");
+});
+
+materialList?.addEventListener("dragleave", (event) => {
+  const row = event.target.closest(".admin-grid-row[data-index]");
+  row?.classList.remove("is-drag-over");
+});
+
+materialList?.addEventListener("drop", async (event) => {
+  const row = event.target.closest(".admin-grid-row[data-index]");
+  if (!row) return;
+  event.preventDefault();
+  clearDragClasses();
+
+  const fromIndex = Number(event.dataTransfer.getData("text/plain"));
+  const toIndex = Number(row.dataset.index);
+  if (!Number.isInteger(fromIndex) || !Number.isInteger(toIndex) || fromIndex === toIndex) return;
+
+  await reorderMaterials(fromIndex, toIndex);
+});
+
+materialList?.addEventListener("dragend", () => {
+  clearDragClasses();
+});
+
 cancelEditButton?.addEventListener("click", () => {
   resetMaterialForm();
   setText(uploadStatus, "Edit cancelled.");
@@ -304,6 +341,7 @@ function renderAdminMaterials() {
 
   materialList.innerHTML = `
     <div class="admin-grid-row admin-grid-head">
+      <span>Order</span>
       <span>Title</span>
       <span>Subject</span>
       <span>Type</span>
@@ -313,7 +351,8 @@ function renderAdminMaterials() {
     ${state.materials.map((item, index) => {
       const link = item.url ? `<a href="${item.url}" target="_blank" rel="noopener">Open</a>` : "<span>No file</span>";
       return `
-        <div class="admin-grid-row">
+        <div class="admin-grid-row" draggable="true" data-index="${index}">
+          <span class="drag-cell" title="Drag to reorder">Drag</span>
           <span>${escapeHtml(item.title)}</span>
           <span>${escapeHtml(item.subject)}</span>
           <span>${escapeHtml(item.type)}</span>
@@ -326,6 +365,45 @@ function renderAdminMaterials() {
       `;
     }).join("")}
   `;
+}
+
+async function reorderMaterials(fromIndex, toIndex) {
+  const movingItem = state.materials[fromIndex];
+  const targetItem = state.materials[toIndex];
+  if (!movingItem || !targetItem) return;
+
+  const previousMaterials = [...state.materials];
+  const reordered = [...state.materials];
+  const [removed] = reordered.splice(fromIndex, 1);
+  reordered.splice(toIndex, 0, removed);
+  state.materials = reordered;
+  renderAdminMaterials();
+  setText(uploadStatus, "Saving public display order...");
+
+  try {
+    const savedMaterials = await mutateLatestMaterials((latestMaterials) => {
+      const latestFrom = findMaterialIndex(latestMaterials, movingItem);
+      const latestTo = findMaterialIndex(latestMaterials, targetItem);
+      if (latestFrom === -1 || latestTo === -1) return latestMaterials;
+      const [latestRemoved] = latestMaterials.splice(latestFrom, 1);
+      latestMaterials.splice(latestTo, 0, latestRemoved);
+      return latestMaterials;
+    });
+    state.materials = savedMaterials;
+    renderAdminMaterials();
+    setText(uploadStatus, "Order saved. Public Materials page will update after deployment finishes.");
+  } catch (error) {
+    state.materials = previousMaterials;
+    renderAdminMaterials();
+    setText(uploadStatus, `Order save failed: ${error.message}`);
+    await showAlert("Order save failed", error.message, "error");
+  }
+}
+
+function clearDragClasses() {
+  materialList?.querySelectorAll(".is-dragging, .is-drag-over").forEach((row) => {
+    row.classList.remove("is-dragging", "is-drag-over");
+  });
 }
 
 function startEdit(index) {
