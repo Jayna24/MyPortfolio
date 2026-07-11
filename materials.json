@@ -1,6 +1,15 @@
 [
   {
     "subject": "Operating Systems",
+    "title": "Unit-3",
+    "type": "Lecture Notes",
+    "fileName": "Inter Process Communication.pdf",
+    "path": "materials/operating-systems/1783744518333-inter-process-communication.pdf",
+    "url": "materials/operating-systems/1783744518333-inter-process-communication.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Operating Systems",
     "title": "Unit-2",
     "type": "Lecture Notes",
     "fileName": "Threads.pdf",
