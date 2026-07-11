@@ -1,6 +1,15 @@
 [
   {
     "subject": "Operating Systems",
+    "title": "Unit-4",
+    "type": "Lecture Notes",
+    "fileName": "Memory Management.pdf",
+    "path": "materials/operating-systems/1783744600881-memory-management.pdf",
+    "url": "materials/operating-systems/1783744600881-memory-management.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Operating Systems",
     "title": "Unit-3",
     "type": "Lecture Notes",
     "fileName": "Inter Process Communication.pdf",
