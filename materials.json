@@ -1,5 +1,16 @@
 [
   {
+    "id": "1783750679291",
+    "subject": "Operating Systems",
+    "title": "Unit-3 Dead Lock",
+    "type": "Presentation",
+    "fileName": "Deadlock Management.pptx",
+    "path": "materials/operating-systems/1783750671639-deadlock-management.pptx",
+    "url": "materials/operating-systems/1783750671639-deadlock-management.pptx",
+    "uploadedAt": "2026-07-11",
+    "updatedAt": "2026-07-11"
+  },
+  {
     "id": "1783750594278",
     "subject": "Operating Systems",
     "title": "Unit-3 IPC",
