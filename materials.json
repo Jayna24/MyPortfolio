@@ -905,15 +905,6 @@
     "title": "Unit-4 (Dead Lock Management)",
     "type": "Presentation",
     "fileName": "Deadlock Management.pptx",
-    "path": "materials/operating-systems/1783703515378-deadlock-management.pptx",
-    "url": "materials/operating-systems/1783703515378-deadlock-management.pptx",
-    "uploadedAt": "2026-07-10"
-  },
-  {
-    "subject": "Operating Systems",
-    "title": "Unit-4 (Dead Lock Management)",
-    "type": "Presentation",
-    "fileName": "Deadlock Management.pptx",
     "path": "materials/operating-systems/1783703487374-deadlock-management.pptx",
     "url": "materials/operating-systems/1783703487374-deadlock-management.pptx",
     "uploadedAt": "2026-07-10"
@@ -944,23 +935,5 @@
     "path": "materials/operating-systems/1783703203336-operating-systems-introduction.pptx",
     "url": "materials/operating-systems/1783703203336-operating-systems-introduction.pptx",
     "uploadedAt": "2026-07-10"
-  },
-  {
-    "subject": "Operating Systems",
-    "title": "Unit-wise notes and scheduling examples",
-    "type": "Lecture Notes",
-    "fileName": "",
-    "path": "",
-    "url": "",
-    "uploadedAt": "2026-07-09"
-  },
-  {
-    "subject": "Data Structures",
-    "title": "Practice assignments and lab programs",
-    "type": "Assignment",
-    "fileName": "",
-    "path": "",
-    "url": "",
-    "uploadedAt": "2026-07-09"
   }
 ]
