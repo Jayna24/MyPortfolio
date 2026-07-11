@@ -1,5 +1,14 @@
 [
   {
+    "subject": "Data Structures",
+    "title": "Unit-1",
+    "type": "Lecture Notes",
+    "fileName": "DS-Unit-1-202040301.pdf",
+    "path": "materials/data-structures/1783746081513-ds-unit-1-202040301.pdf",
+    "url": "materials/data-structures/1783746081513-ds-unit-1-202040301.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
     "subject": "Compiler Design",
     "title": "Unit-6",
     "type": "Lecture Notes",
