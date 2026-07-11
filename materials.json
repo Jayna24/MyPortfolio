@@ -1,6 +1,15 @@
 [
   {
     "subject": "Data Structures",
+    "title": "Unit-2 Part-2",
+    "type": "Lecture Notes",
+    "fileName": "Queue.pdf",
+    "path": "materials/data-structures/1783746226498-queue.pdf",
+    "url": "materials/data-structures/1783746226498-queue.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Data Structures",
     "title": "Unit-2",
     "type": "Lecture Notes",
     "fileName": "unit 2 linear data structure.pdf",
