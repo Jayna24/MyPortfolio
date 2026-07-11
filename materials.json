@@ -1,6 +1,24 @@
 [
   {
     "subject": "Compiler Design",
+    "title": "Unit-2",
+    "type": "Lecture Notes",
+    "fileName": "CD unit-2.pdf",
+    "path": "materials/compiler-design/1783745276159-cd-unit-2.pdf",
+    "url": "materials/compiler-design/1783745276159-cd-unit-2.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Compiler Design",
+    "title": "Unit-2",
+    "type": "Lecture Notes",
+    "fileName": "CD unit-2.pdf",
+    "path": "materials/compiler-design/1783745242198-cd-unit-2.pdf",
+    "url": "materials/compiler-design/1783745242198-cd-unit-2.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Compiler Design",
     "title": "Unit-1",
     "type": "Lecture Notes",
     "fileName": "CD unit-1.pdf",
