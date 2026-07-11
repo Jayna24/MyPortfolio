@@ -1,6 +1,15 @@
 [
   {
     "subject": "Data Structures",
+    "title": "Unit-4 part-1",
+    "type": "Lecture Notes",
+    "fileName": "Sorting Algorithm Notes.pdf",
+    "path": "materials/data-structures/1783746696049-sorting-algorithm-notes.pdf",
+    "url": "materials/data-structures/1783746696049-sorting-algorithm-notes.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Data Structures",
     "title": "Unit-3 Part-4",
     "type": "Lecture Notes",
     "fileName": "Balanced Tree Mechanism.pdf",
