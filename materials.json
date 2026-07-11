@@ -1,6 +1,15 @@
 [
   {
     "subject": "Data Structures",
+    "title": "Unit-3 Part-1",
+    "type": "Lecture Notes",
+    "fileName": "Trees.pdf",
+    "path": "materials/data-structures/1783746410549-trees.pdf",
+    "url": "materials/data-structures/1783746410549-trees.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Data Structures",
     "title": "Unit-2 Part-3",
     "type": "Lecture Notes",
     "fileName": "DS-Linked List.pdf",
