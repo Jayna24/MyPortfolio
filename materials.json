@@ -1,5 +1,14 @@
 [
   {
+    "subject": "Operating Systems",
+    "title": "Unit-1 part-1",
+    "type": "Lecture Notes",
+    "fileName": "OS_Unit-I.pdf",
+    "path": "materials/operating-systems/1783744323810-os-unit-i.pdf",
+    "url": "materials/operating-systems/1783744323810-os-unit-i.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
     "subject": "Data Structures",
     "title": "Unit-4 (Sorting and Searching)",
     "type": "Presentation",
