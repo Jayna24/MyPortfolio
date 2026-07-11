@@ -199,15 +199,6 @@
   },
   {
     "subject": "Compiler Design",
-    "title": "Unit-6",
-    "type": "Lecture Notes",
-    "fileName": "Unit-6 CD Dependency Graph.pdf",
-    "path": "materials/compiler-design/1783745670451-unit-6-cd-dependency-graph.pdf",
-    "url": "materials/compiler-design/1783745670451-unit-6-cd-dependency-graph.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Compiler Design",
     "title": "Unit-5 Part-2",
     "type": "Lecture Notes",
     "fileName": "Unit-5 CD syntax directed transition.pdf",
@@ -663,6 +654,24 @@
     "fileName": "Queues.pptx",
     "path": "materials/data-structures/1783705108235-queues.pptx",
     "url": "materials/data-structures/1783705108235-queues.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Data Structures",
+    "title": "Unit-2 (Linear Data Structures-Stacks)",
+    "type": "Presentation",
+    "fileName": "Stacks.pptx",
+    "path": "materials/data-structures/1783705068093-stacks.pptx",
+    "url": "materials/data-structures/1783705068093-stacks.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Data Structures",
+    "title": "Unit-2 (Linear Data Structures-Stacks)",
+    "type": "Presentation",
+    "fileName": "Stacks.pptx",
+    "path": "materials/data-structures/1783705052287-stacks.pptx",
+    "url": "materials/data-structures/1783705052287-stacks.pptx",
     "uploadedAt": "2026-07-10"
   },
   {
