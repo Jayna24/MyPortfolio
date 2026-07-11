@@ -827,15 +827,6 @@
     "uploadedAt": "2026-07-10"
   },
   {
-    "subject": "Operating Systems",
-    "title": "Unit-3 (Lexical Analysis)",
-    "type": "Lecture Notes",
-    "fileName": "From-Regular-Expressions-to-Finite-Automata.pptx",
-    "path": "materials/operating-systems/1783704379286-from-regular-expressions-to-finite-automata.pptx",
-    "url": "materials/operating-systems/1783704379286-from-regular-expressions-to-finite-automata.pptx",
-    "uploadedAt": "2026-07-10"
-  },
-  {
     "subject": "Compiler Design",
     "title": "Unit-2 (Regular Languages and Finite automata)",
     "type": "Presentation",
