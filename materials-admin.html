@@ -76,7 +76,11 @@
 
         <div class="upload-list admin-list">
           <h3>Uploaded Materials</h3>
-          <p>Edit or delete uploaded material from here. Drag rows up or down to customize the order shown on the public Materials page. Delete will show a confirmation alert before removing anything.</p>
+          <p>Select one or more materials and delete them together. Drag rows up or down to customize the order shown on the public Materials page.</p>
+          <div class="bulk-actions">
+            <button class="button danger" type="button" id="deleteSelectedMaterials" disabled>Delete Selected</button>
+            <span id="selectedMaterialCount">No materials selected</span>
+          </div>
           <div class="admin-grid-view" id="materialList">
             <p>Loading current materials...</p>
           </div>

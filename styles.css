@@ -540,7 +540,7 @@ address,
 
 .admin-grid-row {
   display: grid;
-  grid-template-columns: 82px 1.25fr 1fr 0.9fr 0.75fr 1.1fr;
+  grid-template-columns: 52px 82px 1.25fr 1fr 0.9fr 0.75fr 1.1fr;
   gap: 1px;
   align-items: center;
   border-top: 1px solid var(--line);
@@ -586,6 +586,31 @@ address,
   color: var(--teal-dark) !important;
   font-weight: 900;
   cursor: grab;
+}
+
+.select-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.select-cell input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--teal);
+}
+
+.bulk-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.bulk-actions span {
+  color: var(--muted);
+  font-weight: 800;
 }
 
 .admin-actions {

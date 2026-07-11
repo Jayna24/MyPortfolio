@@ -8,6 +8,8 @@ const materialList = document.querySelector("#materialList");
 const adminLoginButton = document.querySelector("#adminLogin");
 const adminLogoutLink = document.querySelector("#adminLogout");
 const uploadMaterialButton = document.querySelector("#uploadMaterial");
+const deleteSelectedMaterialsButton = document.querySelector("#deleteSelectedMaterials");
+const selectedMaterialCount = document.querySelector("#selectedMaterialCount");
 const loginStatus = document.querySelector("#loginStatus");
 const uploadStatus = document.querySelector("#uploadStatus");
 const githubTokenInput = document.querySelector("#githubToken");
@@ -27,7 +29,9 @@ const state = {
   repo: "Jayna24/MyPortfolio",
   branch: "main",
   materials: [],
-  editIndex: null
+  editIndex: null,
+  selectedMaterialKeys: new Set(),
+  isBusy: false
 };
 
 navToggle?.addEventListener("click", () => {
@@ -176,34 +180,40 @@ materialList?.addEventListener("click", async (event) => {
   }
 
   if (button.dataset.action === "delete") {
-    const confirmed = await confirmDelete(item.title);
-    if (!confirmed) return;
-
-    setText(uploadStatus, "Deleting material...");
-    try {
-      if (item.path) {
-        await deleteGitHubFile(item.path, `Delete material ${item.fileName || item.title}`, true);
-      }
-      const savedMaterials = await mutateLatestMaterials((latestMaterials) => {
-        const latestIndex = findMaterialIndex(latestMaterials, item);
-        if (latestIndex !== -1) latestMaterials.splice(latestIndex, 1);
-        return latestMaterials;
-      });
-      state.materials = savedMaterials;
-      renderAdminMaterials();
-      resetMaterialForm();
-      setText(uploadStatus, "Deleted. GitHub Pages will update after deployment finishes.");
-      await showAlert("Deleted", "Material has been removed.", "success");
-    } catch (error) {
-      setText(uploadStatus, `Delete failed: ${error.message}`);
-      await showAlert("Delete failed", error.message, "error");
-    }
+    await deleteMaterials([item]);
   }
+});
+
+materialList?.addEventListener("change", (event) => {
+  const checkbox = event.target.closest("input[data-action='select-material']");
+  if (!checkbox) return;
+
+  if (checkbox.dataset.selectAll === "true") {
+    state.selectedMaterialKeys = checkbox.checked
+      ? new Set(state.materials.map((item, index) => materialKey(item, index)))
+      : new Set();
+  } else if (checkbox.checked) {
+    state.selectedMaterialKeys.add(checkbox.value);
+  } else {
+    state.selectedMaterialKeys.delete(checkbox.value);
+  }
+
+  syncMaterialSelection();
+});
+
+deleteSelectedMaterialsButton?.addEventListener("click", async () => {
+  const selectedItems = selectedMaterials();
+  if (!selectedItems.length) return;
+  await deleteMaterials(selectedItems);
 });
 
 materialList?.addEventListener("dragstart", (event) => {
   const row = event.target.closest(".admin-grid-row[data-index]");
   if (!row) return;
+  if (state.isBusy) {
+    event.preventDefault();
+    return;
+  }
   row.classList.add("is-dragging");
   event.dataTransfer.effectAllowed = "move";
   event.dataTransfer.setData("text/plain", row.dataset.index);
@@ -336,11 +346,16 @@ function renderAdminMaterials() {
   if (!materialList) return;
   if (!state.materials.length) {
     materialList.innerHTML = "<p>No materials published yet.</p>";
+    state.selectedMaterialKeys.clear();
+    syncMaterialSelection();
     return;
   }
 
   materialList.innerHTML = `
     <div class="admin-grid-row admin-grid-head">
+      <span class="select-cell">
+        <input type="checkbox" data-action="select-material" data-select-all="true" aria-label="Select all materials">
+      </span>
       <span>Order</span>
       <span>Title</span>
       <span>Subject</span>
@@ -350,8 +365,13 @@ function renderAdminMaterials() {
     </div>
     ${state.materials.map((item, index) => {
       const link = item.url ? `<a href="${item.url}" target="_blank" rel="noopener">Open</a>` : "<span>No file</span>";
+      const key = materialKey(item, index);
+      const checked = state.selectedMaterialKeys.has(key) ? " checked" : "";
       return `
         <div class="admin-grid-row" draggable="true" data-index="${index}">
+          <span class="select-cell">
+            <input type="checkbox" data-action="select-material" value="${escapeHtml(key)}" aria-label="Select ${escapeHtml(item.title)}"${checked}>
+          </span>
           <span class="drag-cell" title="Drag to reorder">Drag</span>
           <span>${escapeHtml(item.title)}</span>
           <span>${escapeHtml(item.subject)}</span>
@@ -365,9 +385,39 @@ function renderAdminMaterials() {
       `;
     }).join("")}
   `;
+  syncMaterialSelection();
+}
+
+async function deleteMaterials(items) {
+  if (!items.length || state.isBusy) return;
+
+  const confirmed = await confirmDeleteMaterials(items);
+  if (!confirmed) return;
+
+  setAdminBusy(true);
+  setText(uploadStatus, `Deleting ${items.length} material${items.length === 1 ? "" : "s"} from public list...`);
+
+  try {
+    const deleteKeys = new Set(items.map((item) => materialIdentity(item)));
+    const deletePaths = [...new Set(items.map((item) => item.path).filter(Boolean))];
+    const savedMaterials = await deleteLatestMaterials(deleteKeys, deletePaths, `Delete ${items.length} material${items.length === 1 ? "" : "s"}`);
+
+    state.materials = savedMaterials;
+    state.selectedMaterialKeys.clear();
+    renderAdminMaterials();
+    resetMaterialForm();
+    setText(uploadStatus, "Deleted. GitHub Pages will update after deployment finishes.");
+    await showAlert("Deleted", `${items.length} material${items.length === 1 ? " has" : "s have"} been removed.`, "success");
+  } catch (error) {
+    setText(uploadStatus, `Delete failed: ${error.message}`);
+    await showAlert("Delete failed", error.message, "error");
+  } finally {
+    setAdminBusy(false);
+  }
 }
 
 async function reorderMaterials(fromIndex, toIndex) {
+  if (state.isBusy) return;
   const movingItem = state.materials[fromIndex];
   const targetItem = state.materials[toIndex];
   if (!movingItem || !targetItem) return;
@@ -404,6 +454,55 @@ function clearDragClasses() {
   materialList?.querySelectorAll(".is-dragging, .is-drag-over").forEach((row) => {
     row.classList.remove("is-dragging", "is-drag-over");
   });
+}
+
+function syncMaterialSelection() {
+  if (!deleteSelectedMaterialsButton || !selectedMaterialCount) return;
+
+  const validKeys = new Set(state.materials.map((item, index) => materialKey(item, index)));
+  state.selectedMaterialKeys.forEach((key) => {
+    if (!validKeys.has(key)) state.selectedMaterialKeys.delete(key);
+  });
+
+  const selectedCount = state.selectedMaterialKeys.size;
+  deleteSelectedMaterialsButton.disabled = state.isBusy || selectedCount === 0;
+  selectedMaterialCount.textContent = selectedCount
+    ? `${selectedCount} material${selectedCount === 1 ? "" : "s"} selected`
+    : "No materials selected";
+
+  const selectAll = materialList?.querySelector("input[data-select-all='true']");
+  if (selectAll) {
+    selectAll.checked = selectedCount > 0 && selectedCount === state.materials.length;
+    selectAll.indeterminate = selectedCount > 0 && selectedCount < state.materials.length;
+    selectAll.disabled = state.isBusy;
+  }
+
+  materialList?.querySelectorAll("input[data-action='select-material']").forEach((input) => {
+    if (input.dataset.selectAll !== "true") input.disabled = state.isBusy;
+  });
+}
+
+function selectedMaterials() {
+  return state.materials.filter((item, index) => state.selectedMaterialKeys.has(materialKey(item, index)));
+}
+
+function materialKey(item, index) {
+  return materialIdentity(item) || `index:${index}`;
+}
+
+function materialIdentity(item) {
+  if (item?.id) return `id:${item.id}`;
+  if (item?.path) return `path:${item.path}`;
+  return `signature:${item?.subject || ""}|${item?.title || ""}|${item?.type || ""}`;
+}
+
+function setAdminBusy(isBusy) {
+  state.isBusy = isBusy;
+  if (uploadMaterialButton) uploadMaterialButton.disabled = isBusy;
+  materialList?.querySelectorAll("button, input").forEach((control) => {
+    control.disabled = isBusy;
+  });
+  syncMaterialSelection();
 }
 
 function startEdit(index) {
@@ -469,6 +568,77 @@ async function mutateLatestMaterials(mutator, attempt = 1) {
     }
     throw error;
   }
+}
+
+async function deleteLatestMaterials(deleteKeys, deletePaths, message, attempt = 1) {
+  const latestDocument = await readMaterialsDocumentFromGitHub();
+  const nextMaterials = latestDocument.materials.filter((item) => !deleteKeys.has(materialIdentity(item)));
+
+  try {
+    await commitMaterialsAndDeletedFiles(nextMaterials, deletePaths, message);
+    return nextMaterials;
+  } catch (error) {
+    if (attempt < 3 && isConflictError(error)) {
+      return deleteLatestMaterials(deleteKeys, deletePaths, message, attempt + 1);
+    }
+    throw error;
+  }
+}
+
+async function commitMaterialsAndDeletedFiles(materials, deletePaths, message) {
+  const ref = await githubApi(`repos/${state.repo}/git/ref/heads/${state.branch}`);
+  const commit = await githubApi(`repos/${state.repo}/git/commits/${ref.object.sha}`);
+  const materialsBlob = await githubApi(`repos/${state.repo}/git/blobs`, {
+    method: "POST",
+    body: JSON.stringify({
+      content: JSON.stringify(materials, null, 2),
+      encoding: "utf-8"
+    })
+  });
+
+  const existingDeletePaths = [];
+  for (const path of deletePaths) {
+    const sha = await getFileSha(path);
+    if (sha) existingDeletePaths.push(path);
+  }
+
+  const tree = await githubApi(`repos/${state.repo}/git/trees`, {
+    method: "POST",
+    body: JSON.stringify({
+      base_tree: commit.tree.sha,
+      tree: [
+        {
+          path: "materials.json",
+          mode: "100644",
+          type: "blob",
+          sha: materialsBlob.sha
+        },
+        ...existingDeletePaths.map((path) => ({
+          path,
+          mode: "100644",
+          type: "blob",
+          sha: null
+        }))
+      ]
+    })
+  });
+
+  const newCommit = await githubApi(`repos/${state.repo}/git/commits`, {
+    method: "POST",
+    body: JSON.stringify({
+      message,
+      tree: tree.sha,
+      parents: [ref.object.sha]
+    })
+  });
+
+  await githubApi(`repos/${state.repo}/git/refs/heads/${state.branch}`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      sha: newCommit.sha,
+      force: false
+    })
+  });
 }
 
 function findMaterialIndex(materials, target) {
@@ -566,7 +736,8 @@ function formatGitHubError(status, message) {
 }
 
 function isConflictError(error) {
-  return String(error.message || "").includes("409");
+  const message = String(error.message || "");
+  return message.includes("409") || message.includes("Reference update failed");
 }
 
 async function confirmDelete(title) {
@@ -585,6 +756,26 @@ async function confirmDelete(title) {
   }
 
   return window.confirm(`Are you sure you want to delete "${title}"?`);
+}
+
+async function confirmDeleteMaterials(items) {
+  if (items.length === 1) return confirmDelete(items[0].title);
+
+  if (window.Swal) {
+    const result = await Swal.fire({
+      title: "Delete selected materials?",
+      text: `${items.length} materials will be removed from the public Materials page and GitHub storage.`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#b42318",
+      cancelButtonColor: "#0f766e",
+      confirmButtonText: "Yes, delete selected",
+      cancelButtonText: "Cancel"
+    });
+    return result.isConfirmed;
+  }
+
+  return window.confirm(`Are you sure you want to delete ${items.length} selected materials?`);
 }
 
 async function showAlert(title, text, icon) {
