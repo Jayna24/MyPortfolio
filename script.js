@@ -69,7 +69,8 @@ adminLoginButton?.addEventListener("click", async () => {
 
   setText(loginStatus, "Checking GitHub access...");
   try {
-    await githubApi(`repos/${state.repo}`);
+    const repoData = await githubApi(`repos/${state.repo}`);
+    verifyRepositoryWriteAccess(repoData);
     sessionStorage.setItem(SESSION_TOKEN_KEY, state.token);
     sessionStorage.setItem(SESSION_REPO_KEY, state.repo);
     setText(loginStatus, "Login successful. Opening material upload page...");
@@ -269,7 +270,8 @@ async function initMaterialsAdmin() {
 
   setText(uploadStatus, "Loading uploaded materials...");
   try {
-    await githubApi(`repos/${state.repo}`);
+    const repoData = await githubApi(`repos/${state.repo}`);
+    verifyRepositoryWriteAccess(repoData);
     state.materials = await readMaterialsFromGitHub();
     renderAdminMaterials();
     setText(uploadStatus, "Ready. Upload new material from the upper form.");
@@ -408,11 +410,32 @@ async function githubApi(endpoint, options = {}) {
 
   if (!response.ok) {
     const message = await response.text();
-    throw new Error(`${response.status} ${message}`);
+    throw new Error(formatGitHubError(response.status, message));
   }
 
   if (response.status === 204) return null;
   return response.json();
+}
+
+function verifyRepositoryWriteAccess(repoData) {
+  const permissions = repoData?.permissions;
+  if (!permissions) return;
+  const canWrite = permissions.push || permissions.admin || permissions.maintain;
+  if (!canWrite) {
+    throw new Error("This token can read the repository but cannot change files. Create a fine-grained GitHub token for Jayna24/MyPortfolio with Repository permissions -> Contents: Read and write.");
+  }
+}
+
+function formatGitHubError(status, message) {
+  if (status === 403 && message.includes("Resource not accessible by personal access token")) {
+    return "GitHub refused this action because the token does not have Contents: Read and write permission for Jayna24/MyPortfolio. Edit or recreate the token with Repository permissions -> Contents: Read and write, then login again.";
+  }
+
+  if (status === 401) {
+    return "GitHub token is invalid or expired. Create a new token and login again.";
+  }
+
+  return `${status} ${message}`;
 }
 
 async function confirmDelete(title) {

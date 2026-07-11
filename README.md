@@ -27,5 +27,5 @@ This folder contains a GitHub Pages-ready academic portfolio website for Dr. Jay
 
 The public page reads `materials.json` and shows student-facing subject materials only. Admin login is handled at `admin-login.html`. After login, `materials-admin.html` lets an authorized admin upload files into the repository under `materials/`, update `materials.json`, and manage uploaded content in a grid with Edit and Delete options.
 
-Use a fine-grained GitHub token limited to this repository with Contents read/write access. Do not hard-code the token into the website.
+Use a fine-grained GitHub token limited to this repository with Repository permissions -> Contents: Read and write. Do not hard-code the token into the website.
 
