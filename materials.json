@@ -1,6 +1,24 @@
 [
   {
     "subject": "Operating Systems",
+    "title": "Unit-3",
+    "type": "Lecture Notes",
+    "fileName": "Deadlock.pdf",
+    "path": "materials/operating-systems/1783744716836-deadlock.pdf",
+    "url": "materials/operating-systems/1783744716836-deadlock.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Operating Systems",
+    "title": "Unit-3",
+    "type": "Lecture Notes",
+    "fileName": "Deadlock.pdf",
+    "path": "materials/operating-systems/1783744642432-deadlock.pdf",
+    "url": "materials/operating-systems/1783744642432-deadlock.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Operating Systems",
     "title": "Unit-4",
     "type": "Lecture Notes",
     "fileName": "Memory Management.pdf",
