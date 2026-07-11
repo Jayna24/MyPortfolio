@@ -1,198 +1,92 @@
 [
   {
-    "id": "1783751559210",
-    "subject": "Operating Systems",
-    "title": "Unit-6 Linux",
-    "type": "Presentation",
-    "fileName": "Windows and Linux.pptx",
-    "path": "materials/operating-systems/1783751544089-windows-and-linux.pptx",
-    "url": "materials/operating-systems/1783751544089-windows-and-linux.pptx",
-    "uploadedAt": "2026-07-11",
-    "updatedAt": "2026-07-11"
-  },
-  {
-    "id": "1783750830772",
-    "subject": "Operating Systems",
-    "title": "Unit-5 File management",
-    "type": "Presentation",
-    "fileName": "File-Allocation.pptx",
-    "path": "materials/operating-systems/1783750815462-file-allocation.pptx",
-    "url": "materials/operating-systems/1783750815462-file-allocation.pptx",
-    "uploadedAt": "2026-07-11",
-    "updatedAt": "2026-07-11"
-  },
-  {
-    "id": "1783750679291",
-    "subject": "Operating Systems",
-    "title": "Unit-3 Dead Lock",
-    "type": "Presentation",
-    "fileName": "Deadlock Management.pptx",
-    "path": "materials/operating-systems/1783750671639-deadlock-management.pptx",
-    "url": "materials/operating-systems/1783750671639-deadlock-management.pptx",
-    "uploadedAt": "2026-07-11",
-    "updatedAt": "2026-07-11"
-  },
-  {
-    "id": "1783750594278",
-    "subject": "Operating Systems",
-    "title": "Unit-3 IPC",
-    "type": "Presentation",
-    "fileName": "Interprocess Communication.pptx",
-    "path": "materials/operating-systems/1783750586642-interprocess-communication.pptx",
-    "url": "materials/operating-systems/1783750586642-interprocess-communication.pptx",
-    "uploadedAt": "2026-07-11",
-    "updatedAt": "2026-07-11"
-  },
-  {
-    "id": "1783750478663",
-    "subject": "Operating Systems",
-    "title": "Unit-4 memory Management",
-    "type": "Presentation",
-    "fileName": "Virtual Memory.pptx",
-    "path": "materials/operating-systems/1783750470865-virtual-memory.pptx",
-    "url": "materials/operating-systems/1783750470865-virtual-memory.pptx",
-    "uploadedAt": "2026-07-11",
-    "updatedAt": "2026-07-11"
-  },
-  {
-    "id": "1783751948582",
-    "subject": "Operating Systems",
-    "title": "Unit-5 I/O Management",
-    "type": "Lecture Notes",
-    "fileName": "IO-Management.pptx",
-    "path": "materials/operating-systems/1783751938514-io-management.pptx",
-    "url": "materials/operating-systems/1783751938514-io-management.pptx",
-    "uploadedAt": "2026-07-11",
-    "updatedAt": "2026-07-11"
-  },
-  {
-    "id": "1783749451795",
-    "subject": "Data Structures",
-    "title": "Unit-4 Part-4",
-    "type": "Lecture Notes",
-    "fileName": "Hashing & File Structure.pdf",
-    "path": "materials/data-structures/1783749426795-hashing-file-structure.pdf",
-    "url": "materials/data-structures/1783749426795-hashing-file-structure.pdf",
-    "uploadedAt": "2026-07-11",
-    "updatedAt": "2026-07-11"
-  },
-  {
-    "id": "1783749363178",
-    "subject": "Data Structures",
-    "title": "Unit-4 Part-3",
-    "type": "Lecture Notes",
-    "fileName": "Merge and Quick Sort.pdf",
-    "path": "materials/data-structures/1783749358885-merge-and-quick-sort.pdf",
-    "url": "materials/data-structures/1783749358885-merge-and-quick-sort.pdf",
-    "uploadedAt": "2026-07-11",
-    "updatedAt": "2026-07-11"
-  },
-  {
-    "subject": "Data Structures",
-    "title": "Unit-4 part-1",
-    "type": "Lecture Notes",
-    "fileName": "Sorting Algorithm Notes.pdf",
-    "path": "materials/data-structures/1783746696049-sorting-algorithm-notes.pdf",
-    "url": "materials/data-structures/1783746696049-sorting-algorithm-notes.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Data Structures",
-    "title": "Unit-3 Part-4",
-    "type": "Lecture Notes",
-    "fileName": "Balanced Tree Mechanism.pdf",
-    "path": "materials/data-structures/1783746590203-balanced-tree-mechanism.pdf",
-    "url": "materials/data-structures/1783746590203-balanced-tree-mechanism.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Data Structures",
-    "title": "Unit-3 Part-3",
-    "type": "Lecture Notes",
-    "fileName": "2-3 Trees.pdf",
-    "path": "materials/data-structures/1783746527706-2-3-trees.pdf",
-    "url": "materials/data-structures/1783746527706-2-3-trees.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Data Structures",
-    "title": "Unit-3 Part-2",
-    "type": "Lecture Notes",
-    "fileName": "Graph.pdf",
-    "path": "materials/data-structures/1783746447185-graph.pdf",
-    "url": "materials/data-structures/1783746447185-graph.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Data Structures",
-    "title": "Unit-3 Part-1",
-    "type": "Lecture Notes",
-    "fileName": "Trees.pdf",
-    "path": "materials/data-structures/1783746410549-trees.pdf",
-    "url": "materials/data-structures/1783746410549-trees.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Data Structures",
-    "title": "Unit-2 Part-3",
-    "type": "Lecture Notes",
-    "fileName": "DS-Linked List.pdf",
-    "path": "materials/data-structures/1783746342750-ds-linked-list.pdf",
-    "url": "materials/data-structures/1783746342750-ds-linked-list.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Data Structures",
-    "title": "Unit-2 Part-2",
-    "type": "Lecture Notes",
-    "fileName": "Queue.pdf",
-    "path": "materials/data-structures/1783746226498-queue.pdf",
-    "url": "materials/data-structures/1783746226498-queue.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Data Structures",
-    "title": "Unit-2",
-    "type": "Lecture Notes",
-    "fileName": "unit 2 linear data structure.pdf",
-    "path": "materials/data-structures/1783746106511-unit-2-linear-data-structure.pdf",
-    "url": "materials/data-structures/1783746106511-unit-2-linear-data-structure.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Data Structures",
+    "subject": "Compiler Design",
     "title": "Unit-1",
     "type": "Lecture Notes",
-    "fileName": "DS-Unit-1-202040301.pdf",
-    "path": "materials/data-structures/1783746081513-ds-unit-1-202040301.pdf",
-    "url": "materials/data-structures/1783746081513-ds-unit-1-202040301.pdf",
+    "fileName": "CD unit-1.pdf",
+    "path": "materials/compiler-design/1783745212941-cd-unit-1.pdf",
+    "url": "materials/compiler-design/1783745212941-cd-unit-1.pdf",
     "uploadedAt": "2026-07-11"
   },
   {
     "subject": "Compiler Design",
-    "title": "Unit-6",
+    "title": "Unit-1 (Introduction)",
+    "type": "Presentation",
+    "fileName": "Basics of Compiler_Unit-1.pptx",
+    "path": "materials/compiler-design/1783704071756-basics-of-compiler-unit-1.pptx",
+    "url": "materials/compiler-design/1783704071756-basics-of-compiler-unit-1.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Compiler Design",
+    "title": "Unit-2",
     "type": "Lecture Notes",
-    "fileName": "Unit-6 CD Dependency Graph.pdf",
-    "path": "materials/compiler-design/1783745683756-unit-6-cd-dependency-graph.pdf",
-    "url": "materials/compiler-design/1783745683756-unit-6-cd-dependency-graph.pdf",
+    "fileName": "CD unit-2.pdf",
+    "path": "materials/compiler-design/1783745242198-cd-unit-2.pdf",
+    "url": "materials/compiler-design/1783745242198-cd-unit-2.pdf",
     "uploadedAt": "2026-07-11"
   },
   {
     "subject": "Compiler Design",
-    "title": "Unit-5 Part-2",
+    "title": "Unit-2 (Regular Languages and Finite automata)",
+    "type": "Presentation",
+    "fileName": "Regular-Languages-and-Finite-Automata.pptx",
+    "path": "materials/compiler-design/1783704206139-regular-languages-and-finite-automata.pptx",
+    "url": "materials/compiler-design/1783704206139-regular-languages-and-finite-automata.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Compiler Design",
+    "title": "Unit-3",
     "type": "Lecture Notes",
-    "fileName": "Unit-5 CD syntax directed transition.pdf",
-    "path": "materials/compiler-design/1783745594001-unit-5-cd-syntax-directed-transition.pdf",
-    "url": "materials/compiler-design/1783745594001-unit-5-cd-syntax-directed-transition.pdf",
+    "fileName": "CD unit-3.pdf",
+    "path": "materials/compiler-design/1783745328393-cd-unit-3.pdf",
+    "url": "materials/compiler-design/1783745328393-cd-unit-3.pdf",
     "uploadedAt": "2026-07-11"
   },
   {
     "subject": "Compiler Design",
-    "title": "Unit-5 Part-1",
+    "title": "Unit-3(Lexical Analysis)",
     "type": "Lecture Notes",
-    "fileName": "Unit-5 CD SDT.pdf",
-    "path": "materials/compiler-design/1783745528319-unit-5-cd-sdt.pdf",
-    "url": "materials/compiler-design/1783745528319-unit-5-cd-sdt.pdf",
+    "fileName": "From-Regular-Expressions-to-Finite-Automata.pptx",
+    "path": "materials/compiler-design/1783704443480-from-regular-expressions-to-finite-automata.pptx",
+    "url": "materials/compiler-design/1783704443480-from-regular-expressions-to-finite-automata.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Compiler Design",
+    "title": "Unit-4 (Contex free Grammars)",
+    "type": "Lecture Notes",
+    "fileName": "Context-Free-Grammars.pptx",
+    "path": "materials/compiler-design/1783704918175-context-free-grammars.pptx",
+    "url": "materials/compiler-design/1783704918175-context-free-grammars.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Compiler Design",
+    "title": "Unit-4(Syntax Analysis-Bottom up parsers)",
+    "type": "Lecture Notes",
+    "fileName": "Syntax-Analysis-Mastering-Bottom-Up-Parsing.pptx",
+    "path": "materials/compiler-design/1783704566862-syntax-analysis-mastering-bottom-up-parsing.pptx",
+    "url": "materials/compiler-design/1783704566862-syntax-analysis-mastering-bottom-up-parsing.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Compiler Design",
+    "title": "Unit-4 (Syntax Analysis-Top Down Parsers)",
+    "type": "Lecture Notes",
+    "fileName": "Syntax-Analysis-Top-Down-Parsers.pptx",
+    "path": "materials/compiler-design/1783704514607-syntax-analysis-top-down-parsers.pptx",
+    "url": "materials/compiler-design/1783704514607-syntax-analysis-top-down-parsers.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Compiler Design",
+    "title": "Unit-4 Part-1",
+    "type": "Lecture Notes",
+    "fileName": "CD unit-4.pdf",
+    "path": "materials/compiler-design/1783745427649-cd-unit-4.pdf",
+    "url": "materials/compiler-design/1783745427649-cd-unit-4.pdf",
     "uploadedAt": "2026-07-11"
   },
   {
@@ -206,174 +100,84 @@
   },
   {
     "subject": "Compiler Design",
-    "title": "Unit-4 Part-1",
+    "title": "Unit-5 (Semantic Analysis)",
     "type": "Lecture Notes",
-    "fileName": "CD unit-4.pdf",
-    "path": "materials/compiler-design/1783745427649-cd-unit-4.pdf",
-    "url": "materials/compiler-design/1783745427649-cd-unit-4.pdf",
+    "fileName": "Semantic-Analysis-The-Language-of-Translation.pptx",
+    "path": "materials/compiler-design/1783704681639-semantic-analysis-the-language-of-translation.pptx",
+    "url": "materials/compiler-design/1783704681639-semantic-analysis-the-language-of-translation.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Compiler Design",
+    "title": "Unit-5 Part-1",
+    "type": "Lecture Notes",
+    "fileName": "Unit-5 CD SDT.pdf",
+    "path": "materials/compiler-design/1783745528319-unit-5-cd-sdt.pdf",
+    "url": "materials/compiler-design/1783745528319-unit-5-cd-sdt.pdf",
     "uploadedAt": "2026-07-11"
   },
   {
     "subject": "Compiler Design",
-    "title": "Unit-4",
+    "title": "Unit-5 Part-2",
     "type": "Lecture Notes",
-    "fileName": "CD unit-4.pdf",
-    "path": "materials/compiler-design/1783745407789-cd-unit-4.pdf",
-    "url": "materials/compiler-design/1783745407789-cd-unit-4.pdf",
+    "fileName": "Unit-5 CD syntax directed transition.pdf",
+    "path": "materials/compiler-design/1783745594001-unit-5-cd-syntax-directed-transition.pdf",
+    "url": "materials/compiler-design/1783745594001-unit-5-cd-syntax-directed-transition.pdf",
     "uploadedAt": "2026-07-11"
   },
   {
     "subject": "Compiler Design",
-    "title": "Unit-3",
+    "title": "Unit-6",
     "type": "Lecture Notes",
-    "fileName": "CD unit-3.pdf",
-    "path": "materials/compiler-design/1783745328393-cd-unit-3.pdf",
-    "url": "materials/compiler-design/1783745328393-cd-unit-3.pdf",
+    "fileName": "Unit-6 CD Dependency Graph.pdf",
+    "path": "materials/compiler-design/1783745683756-unit-6-cd-dependency-graph.pdf",
+    "url": "materials/compiler-design/1783745683756-unit-6-cd-dependency-graph.pdf",
     "uploadedAt": "2026-07-11"
   },
   {
     "subject": "Compiler Design",
-    "title": "Unit-2",
+    "title": "Unit-6 (Intermediate Code Generation)",
     "type": "Lecture Notes",
-    "fileName": "CD unit-2.pdf",
-    "path": "materials/compiler-design/1783745242198-cd-unit-2.pdf",
-    "url": "materials/compiler-design/1783745242198-cd-unit-2.pdf",
-    "uploadedAt": "2026-07-11"
+    "fileName": "Intermediate-Code-Generation.pptx",
+    "path": "materials/compiler-design/1783704730933-intermediate-code-generation.pptx",
+    "url": "materials/compiler-design/1783704730933-intermediate-code-generation.pptx",
+    "uploadedAt": "2026-07-10"
   },
   {
     "subject": "Compiler Design",
+    "title": "Unit-7 (Code Generation-Optimization)",
+    "type": "Lecture Notes",
+    "fileName": "Code-Generation-and-Optimization.pptx",
+    "path": "materials/compiler-design/1783704829050-code-generation-and-optimization.pptx",
+    "url": "materials/compiler-design/1783704829050-code-generation-and-optimization.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Data Structures",
     "title": "Unit-1",
     "type": "Lecture Notes",
-    "fileName": "CD unit-1.pdf",
-    "path": "materials/compiler-design/1783745212941-cd-unit-1.pdf",
-    "url": "materials/compiler-design/1783745212941-cd-unit-1.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Operating Systems",
-    "title": "Unit-6 Part-2",
-    "type": "Lecture Notes",
-    "fileName": "File Management2.pdf",
-    "path": "materials/operating-systems/1783744949640-file-management2.pdf",
-    "url": "materials/operating-systems/1783744949640-file-management2.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Operating Systems",
-    "title": "Unit-6 Part-1",
-    "type": "Lecture Notes",
-    "fileName": "File Management.pdf",
-    "path": "materials/operating-systems/1783744887065-file-management.pdf",
-    "url": "materials/operating-systems/1783744887065-file-management.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Operating Systems",
-    "title": "Unit-5 Part-2",
-    "type": "Lecture Notes",
-    "fileName": "IO management Part-2.pdf",
-    "path": "materials/operating-systems/1783744851768-io-management-part-2.pdf",
-    "url": "materials/operating-systems/1783744851768-io-management-part-2.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Operating Systems",
-    "title": "Unit-5 Part-2",
-    "type": "Lecture Notes",
-    "fileName": "IO management Part-2.pdf",
-    "path": "materials/operating-systems/1783744827323-io-management-part-2.pdf",
-    "url": "materials/operating-systems/1783744827323-io-management-part-2.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Operating Systems",
-    "title": "Unit-5 part-1",
-    "type": "Lecture Notes",
-    "fileName": "IO management part-1.pdf",
-    "path": "materials/operating-systems/1783744789491-io-management-part-1.pdf",
-    "url": "materials/operating-systems/1783744789491-io-management-part-1.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Operating Systems",
-    "title": "Unit-3",
-    "type": "Lecture Notes",
-    "fileName": "Deadlock.pdf",
-    "path": "materials/operating-systems/1783744642432-deadlock.pdf",
-    "url": "materials/operating-systems/1783744642432-deadlock.pdf",
+    "fileName": "DS-Unit-1-202040301.pdf",
+    "path": "materials/data-structures/1783746081513-ds-unit-1-202040301.pdf",
+    "url": "materials/data-structures/1783746081513-ds-unit-1-202040301.pdf",
     "uploadedAt": "2026-07-11"
   },
   {
     "subject": "Data Structures",
-    "title": "Unit-4 (Sorting and Searching)",
+    "title": "Unit-1 (Introduction)",
     "type": "Presentation",
-    "fileName": "Sorting-Searching-and-Hashing.pptx",
-    "path": "materials/data-structures/1783705386088-sorting-searching-and-hashing.pptx",
-    "url": "materials/data-structures/1783705386088-sorting-searching-and-hashing.pptx",
+    "fileName": "Introduction-Data-Structures.pptx",
+    "path": "materials/data-structures/1783704992170-introduction-data-structures.pptx",
+    "url": "materials/data-structures/1783704992170-introduction-data-structures.pptx",
     "uploadedAt": "2026-07-10"
   },
   {
-    "subject": "Operating Systems",
-    "title": "Unit-4",
-    "type": "Lecture Notes",
-    "fileName": "Memory Management.pdf",
-    "path": "materials/operating-systems/1783744600881-memory-management.pdf",
-    "url": "materials/operating-systems/1783744600881-memory-management.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Operating Systems",
-    "title": "Unit-3",
-    "type": "Lecture Notes",
-    "fileName": "Inter Process Communication.pdf",
-    "path": "materials/operating-systems/1783744518333-inter-process-communication.pdf",
-    "url": "materials/operating-systems/1783744518333-inter-process-communication.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Operating Systems",
+    "subject": "Data Structures",
     "title": "Unit-2",
     "type": "Lecture Notes",
-    "fileName": "Threads.pdf",
-    "path": "materials/operating-systems/1783744438887-threads.pdf",
-    "url": "materials/operating-systems/1783744438887-threads.pdf",
+    "fileName": "unit 2 linear data structure.pdf",
+    "path": "materials/data-structures/1783746106511-unit-2-linear-data-structure.pdf",
+    "url": "materials/data-structures/1783746106511-unit-2-linear-data-structure.pdf",
     "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Operating Systems",
-    "title": "Unit-1 Part-2",
-    "type": "Lecture Notes",
-    "fileName": "OS Unit-I Part-2.pdf",
-    "path": "materials/operating-systems/1783744361771-os-unit-i-part-2.pdf",
-    "url": "materials/operating-systems/1783744361771-os-unit-i-part-2.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Operating Systems",
-    "title": "Unit-1 part-1",
-    "type": "Lecture Notes",
-    "fileName": "OS_Unit-I.pdf",
-    "path": "materials/operating-systems/1783744323810-os-unit-i.pdf",
-    "url": "materials/operating-systems/1783744323810-os-unit-i.pdf",
-    "uploadedAt": "2026-07-11"
-  },
-  {
-    "subject": "Data Structures",
-    "title": "Unit-3 (Non-Linear Data Structures-Graphs)",
-    "type": "Presentation",
-    "fileName": "Graphs.pptx",
-    "path": "materials/data-structures/1783705329809-graphs.pptx",
-    "url": "materials/data-structures/1783705329809-graphs.pptx",
-    "uploadedAt": "2026-07-10"
-  },
-  {
-    "subject": "Data Structures",
-    "title": "Unit-3 (Non-Linear Data Structures-Tree)",
-    "type": "Presentation",
-    "fileName": "Tree.pptx",
-    "path": "materials/data-structures/1783705263544-tree.pptx",
-    "url": "materials/data-structures/1783705263544-tree.pptx",
-    "uploadedAt": "2026-07-10"
   },
   {
     "subject": "Data Structures",
@@ -404,102 +208,251 @@
   },
   {
     "subject": "Data Structures",
-    "title": "Unit-1 (Introduction)",
+    "title": "Unit-2 Part-2",
+    "type": "Lecture Notes",
+    "fileName": "Queue.pdf",
+    "path": "materials/data-structures/1783746226498-queue.pdf",
+    "url": "materials/data-structures/1783746226498-queue.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Data Structures",
+    "title": "Unit-2 Part-3",
+    "type": "Lecture Notes",
+    "fileName": "DS-Linked List.pdf",
+    "path": "materials/data-structures/1783746342750-ds-linked-list.pdf",
+    "url": "materials/data-structures/1783746342750-ds-linked-list.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Data Structures",
+    "title": "Unit-3 (Non-Linear Data Structures-Graphs)",
     "type": "Presentation",
-    "fileName": "Introduction-Data-Structures.pptx",
-    "path": "materials/data-structures/1783704992170-introduction-data-structures.pptx",
-    "url": "materials/data-structures/1783704992170-introduction-data-structures.pptx",
+    "fileName": "Graphs.pptx",
+    "path": "materials/data-structures/1783705329809-graphs.pptx",
+    "url": "materials/data-structures/1783705329809-graphs.pptx",
     "uploadedAt": "2026-07-10"
   },
   {
-    "subject": "Compiler Design",
-    "title": "Unit-4 (Contex free Grammars)",
-    "type": "Lecture Notes",
-    "fileName": "Context-Free-Grammars.pptx",
-    "path": "materials/compiler-design/1783704918175-context-free-grammars.pptx",
-    "url": "materials/compiler-design/1783704918175-context-free-grammars.pptx",
-    "uploadedAt": "2026-07-10"
-  },
-  {
-    "subject": "Compiler Design",
-    "title": "Unit-7 (Code Generation-Optimization)",
-    "type": "Lecture Notes",
-    "fileName": "Code-Generation-and-Optimization.pptx",
-    "path": "materials/compiler-design/1783704829050-code-generation-and-optimization.pptx",
-    "url": "materials/compiler-design/1783704829050-code-generation-and-optimization.pptx",
-    "uploadedAt": "2026-07-10"
-  },
-  {
-    "subject": "Compiler Design",
-    "title": "Unit-6 (Intermediate Code Generation)",
-    "type": "Lecture Notes",
-    "fileName": "Intermediate-Code-Generation.pptx",
-    "path": "materials/compiler-design/1783704730933-intermediate-code-generation.pptx",
-    "url": "materials/compiler-design/1783704730933-intermediate-code-generation.pptx",
-    "uploadedAt": "2026-07-10"
-  },
-  {
-    "subject": "Compiler Design",
-    "title": "Unit-5 (Semantic Analysis)",
-    "type": "Lecture Notes",
-    "fileName": "Semantic-Analysis-The-Language-of-Translation.pptx",
-    "path": "materials/compiler-design/1783704681639-semantic-analysis-the-language-of-translation.pptx",
-    "url": "materials/compiler-design/1783704681639-semantic-analysis-the-language-of-translation.pptx",
-    "uploadedAt": "2026-07-10"
-  },
-  {
-    "subject": "Compiler Design",
-    "title": "Unit-4(Syntax Analysis-Bottom up parsers)",
-    "type": "Lecture Notes",
-    "fileName": "Syntax-Analysis-Mastering-Bottom-Up-Parsing.pptx",
-    "path": "materials/compiler-design/1783704566862-syntax-analysis-mastering-bottom-up-parsing.pptx",
-    "url": "materials/compiler-design/1783704566862-syntax-analysis-mastering-bottom-up-parsing.pptx",
-    "uploadedAt": "2026-07-10"
-  },
-  {
-    "subject": "Compiler Design",
-    "title": "Unit-4 (Syntax Analysis-Top Down Parsers)",
-    "type": "Lecture Notes",
-    "fileName": "Syntax-Analysis-Top-Down-Parsers.pptx",
-    "path": "materials/compiler-design/1783704514607-syntax-analysis-top-down-parsers.pptx",
-    "url": "materials/compiler-design/1783704514607-syntax-analysis-top-down-parsers.pptx",
-    "uploadedAt": "2026-07-10"
-  },
-  {
-    "subject": "Compiler Design",
-    "title": "Unit-3(Lexical Analysis)",
-    "type": "Lecture Notes",
-    "fileName": "From-Regular-Expressions-to-Finite-Automata.pptx",
-    "path": "materials/compiler-design/1783704443480-from-regular-expressions-to-finite-automata.pptx",
-    "url": "materials/compiler-design/1783704443480-from-regular-expressions-to-finite-automata.pptx",
-    "uploadedAt": "2026-07-10"
-  },
-  {
-    "subject": "Compiler Design",
-    "title": "Unit-2 (Regular Languages and Finite automata)",
+    "subject": "Data Structures",
+    "title": "Unit-3 (Non-Linear Data Structures-Tree)",
     "type": "Presentation",
-    "fileName": "Regular-Languages-and-Finite-Automata.pptx",
-    "path": "materials/compiler-design/1783704206139-regular-languages-and-finite-automata.pptx",
-    "url": "materials/compiler-design/1783704206139-regular-languages-and-finite-automata.pptx",
+    "fileName": "Tree.pptx",
+    "path": "materials/data-structures/1783705263544-tree.pptx",
+    "url": "materials/data-structures/1783705263544-tree.pptx",
     "uploadedAt": "2026-07-10"
   },
   {
-    "subject": "Compiler Design",
-    "title": "Unit-1 (Introduction)",
+    "subject": "Data Structures",
+    "title": "Unit-3 Part-1",
+    "type": "Lecture Notes",
+    "fileName": "Trees.pdf",
+    "path": "materials/data-structures/1783746410549-trees.pdf",
+    "url": "materials/data-structures/1783746410549-trees.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Data Structures",
+    "title": "Unit-3 Part-2",
+    "type": "Lecture Notes",
+    "fileName": "Graph.pdf",
+    "path": "materials/data-structures/1783746447185-graph.pdf",
+    "url": "materials/data-structures/1783746447185-graph.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Data Structures",
+    "title": "Unit-3 Part-3",
+    "type": "Lecture Notes",
+    "fileName": "2-3 Trees.pdf",
+    "path": "materials/data-structures/1783746527706-2-3-trees.pdf",
+    "url": "materials/data-structures/1783746527706-2-3-trees.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Data Structures",
+    "title": "Unit-3 Part-4",
+    "type": "Lecture Notes",
+    "fileName": "Balanced Tree Mechanism.pdf",
+    "path": "materials/data-structures/1783746590203-balanced-tree-mechanism.pdf",
+    "url": "materials/data-structures/1783746590203-balanced-tree-mechanism.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Data Structures",
+    "title": "Unit-4 (Sorting and Searching)",
     "type": "Presentation",
-    "fileName": "Basics of Compiler_Unit-1.pptx",
-    "path": "materials/compiler-design/1783704071756-basics-of-compiler-unit-1.pptx",
-    "url": "materials/compiler-design/1783704071756-basics-of-compiler-unit-1.pptx",
+    "fileName": "Sorting-Searching-and-Hashing.pptx",
+    "path": "materials/data-structures/1783705386088-sorting-searching-and-hashing.pptx",
+    "url": "materials/data-structures/1783705386088-sorting-searching-and-hashing.pptx",
+    "uploadedAt": "2026-07-10"
+  },
+  {
+    "subject": "Data Structures",
+    "title": "Unit-4 part-1",
+    "type": "Lecture Notes",
+    "fileName": "Sorting Algorithm Notes.pdf",
+    "path": "materials/data-structures/1783746696049-sorting-algorithm-notes.pdf",
+    "url": "materials/data-structures/1783746696049-sorting-algorithm-notes.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "id": "1783749363178",
+    "subject": "Data Structures",
+    "title": "Unit-4 Part-3",
+    "type": "Lecture Notes",
+    "fileName": "Merge and Quick Sort.pdf",
+    "path": "materials/data-structures/1783749358885-merge-and-quick-sort.pdf",
+    "url": "materials/data-structures/1783749358885-merge-and-quick-sort.pdf",
+    "uploadedAt": "2026-07-11",
+    "updatedAt": "2026-07-11"
+  },
+  {
+    "id": "1783749451795",
+    "subject": "Data Structures",
+    "title": "Unit-4 Part-4",
+    "type": "Lecture Notes",
+    "fileName": "Hashing & File Structure.pdf",
+    "path": "materials/data-structures/1783749426795-hashing-file-structure.pdf",
+    "url": "materials/data-structures/1783749426795-hashing-file-structure.pdf",
+    "uploadedAt": "2026-07-11",
+    "updatedAt": "2026-07-11"
+  },
+  {
+    "subject": "Operating Systems",
+    "title": "Unit-1 part-1",
+    "type": "Lecture Notes",
+    "fileName": "OS_Unit-I.pdf",
+    "path": "materials/operating-systems/1783744323810-os-unit-i.pdf",
+    "url": "materials/operating-systems/1783744323810-os-unit-i.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Operating Systems",
+    "title": "Unit-1 Part-2",
+    "type": "Lecture Notes",
+    "fileName": "OS Unit-I Part-2.pdf",
+    "path": "materials/operating-systems/1783744361771-os-unit-i-part-2.pdf",
+    "url": "materials/operating-systems/1783744361771-os-unit-i-part-2.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Operating Systems",
+    "title": "Unit-2",
+    "type": "Lecture Notes",
+    "fileName": "Threads.pdf",
+    "path": "materials/operating-systems/1783744438887-threads.pdf",
+    "url": "materials/operating-systems/1783744438887-threads.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Operating Systems",
+    "title": "Unit-2 (Process-Thread management)",
+    "type": "Presentation",
+    "fileName": "Process -Thread-Management.pptx",
+    "path": "materials/operating-systems/1783703378530-process-thread-management.pptx",
+    "url": "materials/operating-systems/1783703378530-process-thread-management.pptx",
     "uploadedAt": "2026-07-10"
   },
   {
     "subject": "Operating Systems",
-    "title": "Unit-7 (Linux and Windows Management)",
+    "title": "Unit-3",
     "type": "Lecture Notes",
-    "fileName": "Windows and Linux.pptx",
-    "path": "materials/operating-systems/1783703945126-windows-and-linux.pptx",
-    "url": "materials/operating-systems/1783703945126-windows-and-linux.pptx",
-    "uploadedAt": "2026-07-10"
+    "fileName": "Deadlock.pdf",
+    "path": "materials/operating-systems/1783744642432-deadlock.pdf",
+    "url": "materials/operating-systems/1783744642432-deadlock.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Operating Systems",
+    "title": "Unit-3",
+    "type": "Lecture Notes",
+    "fileName": "Inter Process Communication.pdf",
+    "path": "materials/operating-systems/1783744518333-inter-process-communication.pdf",
+    "url": "materials/operating-systems/1783744518333-inter-process-communication.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "id": "1783750679291",
+    "subject": "Operating Systems",
+    "title": "Unit-3 Dead Lock",
+    "type": "Presentation",
+    "fileName": "Deadlock Management.pptx",
+    "path": "materials/operating-systems/1783750671639-deadlock-management.pptx",
+    "url": "materials/operating-systems/1783750671639-deadlock-management.pptx",
+    "uploadedAt": "2026-07-11",
+    "updatedAt": "2026-07-11"
+  },
+  {
+    "id": "1783750594278",
+    "subject": "Operating Systems",
+    "title": "Unit-3 IPC",
+    "type": "Presentation",
+    "fileName": "Interprocess Communication.pptx",
+    "path": "materials/operating-systems/1783750586642-interprocess-communication.pptx",
+    "url": "materials/operating-systems/1783750586642-interprocess-communication.pptx",
+    "uploadedAt": "2026-07-11",
+    "updatedAt": "2026-07-11"
+  },
+  {
+    "subject": "Operating Systems",
+    "title": "Unit-4",
+    "type": "Lecture Notes",
+    "fileName": "Memory Management.pdf",
+    "path": "materials/operating-systems/1783744600881-memory-management.pdf",
+    "url": "materials/operating-systems/1783744600881-memory-management.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "id": "1783750478663",
+    "subject": "Operating Systems",
+    "title": "Unit-4 memory Management",
+    "type": "Presentation",
+    "fileName": "Virtual Memory.pptx",
+    "path": "materials/operating-systems/1783750470865-virtual-memory.pptx",
+    "url": "materials/operating-systems/1783750470865-virtual-memory.pptx",
+    "uploadedAt": "2026-07-11",
+    "updatedAt": "2026-07-11"
+  },
+  {
+    "id": "1783751948582",
+    "subject": "Operating Systems",
+    "title": "Unit-5 I/O Management",
+    "type": "Lecture Notes",
+    "fileName": "IO-Management.pptx",
+    "path": "materials/operating-systems/1783751938514-io-management.pptx",
+    "url": "materials/operating-systems/1783751938514-io-management.pptx",
+    "uploadedAt": "2026-07-11",
+    "updatedAt": "2026-07-11"
+  },
+  {
+    "id": "1783750830772",
+    "subject": "Operating Systems",
+    "title": "Unit-5 File management",
+    "type": "Presentation",
+    "fileName": "File-Allocation.pptx",
+    "path": "materials/operating-systems/1783750815462-file-allocation.pptx",
+    "url": "materials/operating-systems/1783750815462-file-allocation.pptx",
+    "uploadedAt": "2026-07-11",
+    "updatedAt": "2026-07-11"
+  },
+  {
+    "subject": "Operating Systems",
+    "title": "Unit-5 part-1",
+    "type": "Lecture Notes",
+    "fileName": "IO management part-1.pdf",
+    "path": "materials/operating-systems/1783744789491-io-management-part-1.pdf",
+    "url": "materials/operating-systems/1783744789491-io-management-part-1.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Operating Systems",
+    "title": "Unit-5 Part-2",
+    "type": "Lecture Notes",
+    "fileName": "IO management Part-2.pdf",
+    "path": "materials/operating-systems/1783744851768-io-management-part-2.pdf",
+    "url": "materials/operating-systems/1783744851768-io-management-part-2.pdf",
+    "uploadedAt": "2026-07-11"
   },
   {
     "subject": "Operating Systems",
@@ -511,12 +464,41 @@
     "uploadedAt": "2026-07-10"
   },
   {
+    "id": "1783751559210",
     "subject": "Operating Systems",
-    "title": "Unit-2 (Process-Thread management)",
+    "title": "Unit-6 Linux",
     "type": "Presentation",
-    "fileName": "Process -Thread-Management.pptx",
-    "path": "materials/operating-systems/1783703378530-process-thread-management.pptx",
-    "url": "materials/operating-systems/1783703378530-process-thread-management.pptx",
+    "fileName": "Windows and Linux.pptx",
+    "path": "materials/operating-systems/1783751544089-windows-and-linux.pptx",
+    "url": "materials/operating-systems/1783751544089-windows-and-linux.pptx",
+    "uploadedAt": "2026-07-11",
+    "updatedAt": "2026-07-11"
+  },
+  {
+    "subject": "Operating Systems",
+    "title": "Unit-6 Part-1",
+    "type": "Lecture Notes",
+    "fileName": "File Management.pdf",
+    "path": "materials/operating-systems/1783744887065-file-management.pdf",
+    "url": "materials/operating-systems/1783744887065-file-management.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Operating Systems",
+    "title": "Unit-6 Part-2",
+    "type": "Lecture Notes",
+    "fileName": "File Management2.pdf",
+    "path": "materials/operating-systems/1783744949640-file-management2.pdf",
+    "url": "materials/operating-systems/1783744949640-file-management2.pdf",
+    "uploadedAt": "2026-07-11"
+  },
+  {
+    "subject": "Operating Systems",
+    "title": "Unit-7 (Linux and Windows Management)",
+    "type": "Lecture Notes",
+    "fileName": "Windows and Linux.pptx",
+    "path": "materials/operating-systems/1783703945126-windows-and-linux.pptx",
+    "url": "materials/operating-systems/1783703945126-windows-and-linux.pptx",
     "uploadedAt": "2026-07-10"
   }
 ]
