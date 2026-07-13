@@ -62,6 +62,12 @@ filters.forEach((filterButton) => {
   });
 });
 
+publicMaterialRows?.addEventListener("click", (event) => {
+  const button = event.target.closest("button[data-action='print-subject']");
+  if (!button) return;
+  printSubjectMaterials(button.dataset.subject || "");
+});
+
 adminLoginButton?.addEventListener("click", async () => {
   state.token = githubTokenInput.value.trim();
   state.repo = githubRepoInput.value.trim() || "Jayna24/MyPortfolio";
@@ -271,27 +277,39 @@ function renderPublicMaterials(materials, selected = activeFilter()) {
 
   if (!visible.length) {
     publicMaterialRows.innerHTML = `
-      <div class="resource-row" role="row">
-        <span role="cell">No material</span>
-        <span role="cell">No published files are available for this filter yet.</span>
-        <span role="cell">-</span>
-        <span role="cell">-</span>
-      </div>
+      <article class="subject-material-card">
+        <div class="subject-card-head">
+          <div>
+            <span class="subject-label">No material</span>
+            <h3>No published files</h3>
+          </div>
+        </div>
+        <p class="empty-materials">No published files are available for this filter yet.</p>
+      </article>
     `;
     return;
   }
 
-  publicMaterialRows.innerHTML = visible.map((item) => {
-    const access = item.url
-      ? `<a href="${item.url}" target="_blank" rel="noopener" download>Download</a>`
-      : `<a href="#contact">Request Link</a>`;
+  publicMaterialRows.innerHTML = groupedSubjectMaterials(visible).map(([subject, subjectItems]) => {
+    const categories = groupedCategoryMaterials(subjectItems);
     return `
-      <div class="resource-row" role="row">
-        <span role="cell">${escapeHtml(item.subject)}</span>
-        <span role="cell">${escapeHtml(item.title)}</span>
-        <span role="cell">${escapeHtml(item.type)}</span>
-        <span role="cell">${access}</span>
-      </div>
+      <article class="subject-material-card">
+        <div class="subject-card-head">
+          <div>
+            <span class="subject-label">Subject Material</span>
+            <h3>${escapeHtml(subject)}</h3>
+          </div>
+          <button class="button neutral print-subject-button" type="button" data-action="print-subject" data-subject="${escapeHtml(subject)}">Print</button>
+        </div>
+        ${categories.map(([category, categoryItems]) => `
+          <section class="material-category">
+            <h4>${escapeHtml(category)}</h4>
+            <div class="category-material-list">
+              ${categoryItems.map((item) => publicMaterialItemHtml(item)).join("")}
+            </div>
+          </section>
+        `).join("")}
+      </article>
     `;
   }).join("");
 }
@@ -305,14 +323,127 @@ async function loadPublicMaterials() {
     renderPublicMaterials(state.materials);
   } catch (error) {
     publicMaterialRows.innerHTML = `
-      <div class="resource-row" role="row">
-        <span role="cell">Unavailable</span>
-        <span role="cell">Materials could not be loaded right now.</span>
-        <span role="cell">-</span>
-        <span role="cell">Try later</span>
-      </div>
+      <article class="subject-material-card">
+        <div class="subject-card-head">
+          <div>
+            <span class="subject-label">Unavailable</span>
+            <h3>Materials could not be loaded</h3>
+          </div>
+        </div>
+        <p class="empty-materials">Please try again later.</p>
+      </article>
     `;
   }
+}
+
+function groupedSubjectMaterials(materials) {
+  const groups = new Map();
+  materials.forEach((item) => {
+    const subject = item.subject || "Other";
+    if (!groups.has(subject)) groups.set(subject, []);
+    groups.get(subject).push(item);
+  });
+  return [...groups.entries()];
+}
+
+function groupedCategoryMaterials(materials) {
+  const groups = new Map();
+  materials.forEach((item) => {
+    const category = materialCategory(item.type);
+    if (!groups.has(category)) groups.set(category, []);
+    groups.get(category).push(item);
+  });
+
+  return [...groups.entries()].sort(([first], [second]) =>
+    categoryRank(first) - categoryRank(second) || first.localeCompare(second)
+  );
+}
+
+function materialCategory(type) {
+  const value = String(type || "").toLowerCase();
+  if (value.includes("presentation")) return "Presentation";
+  if (value.includes("lecture")) return "Lecture Notes";
+  return type || "Other Material";
+}
+
+function categoryRank(category) {
+  if (category === "Lecture Notes") return 1;
+  if (category === "Presentation") return 2;
+  return 3;
+}
+
+function publicMaterialItemHtml(item) {
+  const access = item.url
+    ? `<a class="download-link" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" download>Download</a>`
+    : `<a class="download-link" href="#contact">Request Link</a>`;
+  return `
+    <div class="category-material-item">
+      <span>${escapeHtml(item.title)}</span>
+      ${access}
+    </div>
+  `;
+}
+
+function printSubjectMaterials(subject) {
+  const subjectItems = state.materials.filter((item) => item.subject === subject);
+  if (!subjectItems.length) return;
+
+  const siteUrl = window.location.origin + window.location.pathname;
+  const categories = groupedCategoryMaterials(subjectItems);
+  const printWindow = window.open("", "_blank", "width=960,height=720");
+  if (!printWindow) {
+    window.print();
+    return;
+  }
+
+  printWindow.document.write(`
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>${escapeHtml(subject)} Materials</title>
+        <style>
+          body { margin: 0; padding: 32px; color: #17202a; font-family: Arial, sans-serif; }
+          .toolbar { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 24px; }
+          button, .download { border: 0; border-radius: 8px; padding: 10px 14px; background: #0f766e; color: #fff; font-weight: 700; text-decoration: none; }
+          .meta { color: #52616b; margin: 6px 0; }
+          h1 { margin: 10px 0 4px; font-size: 30px; }
+          h2 { margin-top: 28px; padding-bottom: 8px; border-bottom: 2px solid #0f766e; font-size: 20px; }
+          .item { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; padding: 12px 0; border-bottom: 1px solid #dce5e4; }
+          .item span { font-weight: 700; }
+          @media print {
+            body { padding: 18px; }
+            .toolbar { display: none; }
+            .download { border: 1px solid #0f766e; color: #0f766e; background: transparent; }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="toolbar">
+          <button type="button" onclick="window.print()">Print</button>
+        </div>
+        <p class="meta">Website URL: ${escapeHtml(siteUrl)}</p>
+        <h1>${escapeHtml(subject)}</h1>
+        ${categories.map(([category, items]) => `
+          <section>
+            <h2>${escapeHtml(category)}</h2>
+            ${items.map((item) => {
+              const href = item.url ? new URL(item.url, siteUrl).href : "#";
+              return `
+                <div class="item">
+                  <span>${escapeHtml(item.title)}</span>
+                  ${item.url ? `<a class="download" href="${escapeHtml(href)}" target="_blank" rel="noopener">Download</a>` : `<span>No file</span>`}
+                </div>
+              `;
+            }).join("")}
+          </section>
+        `).join("")}
+      </body>
+    </html>
+  `);
+  printWindow.document.close();
+  printWindow.focus();
 }
 
 async function initMaterialsAdmin() {

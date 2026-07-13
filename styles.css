@@ -440,6 +440,100 @@ address,
   font-size: 18px;
 }
 
+.subject-material-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.subject-material-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  overflow: hidden;
+}
+
+.subject-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 20px 22px;
+  background: #f5fbfa;
+  border-bottom: 1px solid var(--line);
+}
+
+.subject-card-head h3 {
+  margin: 6px 0 0;
+  font-size: 24px;
+}
+
+.subject-label {
+  color: var(--teal-dark);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.print-subject-button {
+  flex: 0 0 auto;
+}
+
+.material-category {
+  padding: 18px 22px 20px;
+}
+
+.material-category + .material-category {
+  border-top: 1px solid var(--line);
+}
+
+.material-category h4 {
+  margin: 0 0 12px;
+  color: var(--ink);
+  font-size: 18px;
+}
+
+.category-material-list {
+  display: grid;
+  gap: 10px;
+}
+
+.category-material-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.category-material-item span {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.download-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: var(--teal-dark);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.empty-materials {
+  margin: 0;
+  padding: 20px 22px;
+  color: var(--muted);
+}
+
 .resource-table {
   display: grid;
   overflow: hidden;
@@ -797,6 +891,21 @@ address {
   .admin-form-grid,
   .admin-grid-row {
     grid-template-columns: 1fr;
+  }
+
+  .subject-card-head,
+  .category-material-item {
+    grid-template-columns: 1fr;
+  }
+
+  .subject-card-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .print-subject-button,
+  .download-link {
+    width: 100%;
   }
 
   .admin-actions {

@@ -166,21 +166,16 @@
         </div>
         <div class="student-materials">
           <p class="materials-intro">Students can access only the study content published by the admin. New files, notes, assignments, and links will appear here after they are added from the admin side.</p>
-          <div class="resource-table" role="table" aria-label="Published subject materials">
-            <div class="resource-row resource-head" role="row">
-              <span role="columnheader">Subject</span>
-              <span role="columnheader">Material</span>
-              <span role="columnheader">Type</span>
-              <span role="columnheader">Access</span>
-            </div>
-            <div id="publicMaterialRows">
-              <div class="resource-row" role="row">
-                <span role="cell">Loading</span>
-                <span role="cell">Checking published materials...</span>
-                <span role="cell">Please wait</span>
-                <span role="cell">-</span>
+          <div class="subject-material-grid" id="publicMaterialRows" aria-live="polite">
+            <article class="subject-material-card">
+              <div class="subject-card-head">
+                <div>
+                  <span class="subject-label">Loading</span>
+                  <h3>Checking published materials...</h3>
+                </div>
               </div>
-            </div>
+              <p class="empty-materials">Please wait.</p>
+            </article>
           </div>
         </div>
       </section>
