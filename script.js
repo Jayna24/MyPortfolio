@@ -63,9 +63,9 @@ filters.forEach((filterButton) => {
 });
 
 publicMaterialRows?.addEventListener("click", (event) => {
-  const button = event.target.closest("button[data-action='print-subject']");
+  const button = event.target.closest("button[data-action='print-category']");
   if (!button) return;
-  printSubjectMaterials(button.dataset.subject || "");
+  printCategoryMaterials(button.dataset.subject || "", button.dataset.category || "");
 });
 
 adminLoginButton?.addEventListener("click", async () => {
@@ -299,11 +299,13 @@ function renderPublicMaterials(materials, selected = activeFilter()) {
             <span class="subject-label">Subject Material</span>
             <h3>${escapeHtml(subject)}</h3>
           </div>
-          <button class="button neutral print-subject-button" type="button" data-action="print-subject" data-subject="${escapeHtml(subject)}">Print</button>
         </div>
         ${categories.map(([category, categoryItems]) => `
           <section class="material-category">
-            <h4>${escapeHtml(category)}</h4>
+            <div class="category-head">
+              <h4>${escapeHtml(category)}</h4>
+              <button class="button neutral print-category-button" type="button" data-action="print-category" data-subject="${escapeHtml(subject)}" data-category="${escapeHtml(category)}">Print</button>
+            </div>
             <div class="category-material-list">
               ${categoryItems.map((item) => publicMaterialItemHtml(item)).join("")}
             </div>
@@ -384,12 +386,13 @@ function publicMaterialItemHtml(item) {
   `;
 }
 
-function printSubjectMaterials(subject) {
-  const subjectItems = state.materials.filter((item) => item.subject === subject);
+function printCategoryMaterials(subject, category) {
+  const subjectItems = state.materials.filter((item) =>
+    item.subject === subject && materialCategory(item.type) === category
+  );
   if (!subjectItems.length) return;
 
-  const siteUrl = window.location.origin + window.location.pathname;
-  const categories = groupedCategoryMaterials(subjectItems);
+  const siteUrl = cleanSiteUrl();
   const printWindow = window.open("", "_blank", "width=960,height=720");
   if (!printWindow) {
     window.print();
@@ -402,12 +405,25 @@ function printSubjectMaterials(subject) {
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>${escapeHtml(subject)} Materials</title>
+        <title>${escapeHtml(subject)} ${escapeHtml(category)}</title>
         <style>
           body { margin: 0; padding: 32px; color: #17202a; font-family: Arial, sans-serif; }
           .toolbar { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 24px; }
           button, .download { border: 0; border-radius: 8px; padding: 10px 14px; background: #0f766e; color: #fff; font-weight: 700; text-decoration: none; }
-          .meta { color: #52616b; margin: 6px 0; }
+          .address-bar {
+            display: flex;
+            align-items: center;
+            min-height: 38px;
+            margin-bottom: 22px;
+            padding: 8px 14px;
+            border: 1px solid #ccd8d7;
+            border-radius: 999px;
+            background: #f4f7f7;
+            color: #24343d;
+            font-size: 14px;
+            word-break: break-all;
+          }
+          .meta { color: #52616b; margin: 6px 0; font-weight: 700; }
           h1 { margin: 10px 0 4px; font-size: 30px; }
           h2 { margin-top: 28px; padding-bottom: 8px; border-bottom: 2px solid #0f766e; font-size: 20px; }
           .item { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; padding: 12px 0; border-bottom: 1px solid #dce5e4; }
@@ -423,27 +439,33 @@ function printSubjectMaterials(subject) {
         <div class="toolbar">
           <button type="button" onclick="window.print()">Print</button>
         </div>
-        <p class="meta">Website URL: ${escapeHtml(siteUrl)}</p>
+        <p class="meta">Website URL</p>
+        <div class="address-bar">${escapeHtml(siteUrl)}</div>
         <h1>${escapeHtml(subject)}</h1>
-        ${categories.map(([category, items]) => `
-          <section>
-            <h2>${escapeHtml(category)}</h2>
-            ${items.map((item) => {
-              const href = item.url ? new URL(item.url, siteUrl).href : "#";
-              return `
-                <div class="item">
-                  <span>${escapeHtml(item.title)}</span>
-                  ${item.url ? `<a class="download" href="${escapeHtml(href)}" target="_blank" rel="noopener">Download</a>` : `<span>No file</span>`}
-                </div>
-              `;
-            }).join("")}
-          </section>
-        `).join("")}
+        <section>
+          <h2>${escapeHtml(category)}</h2>
+          ${subjectItems.map((item) => {
+            const href = item.url ? new URL(item.url, siteUrl).href : "#";
+            return `
+              <div class="item">
+                <span>${escapeHtml(item.title)}</span>
+                ${item.url ? `<a class="download" href="${escapeHtml(href)}" target="_blank" rel="noopener">Download</a>` : `<span>No file</span>`}
+              </div>
+            `;
+          }).join("")}
+        </section>
       </body>
     </html>
   `);
   printWindow.document.close();
   printWindow.focus();
+}
+
+function cleanSiteUrl() {
+  const path = window.location.pathname.endsWith("index.html")
+    ? window.location.pathname
+    : `${window.location.pathname.replace(/\/$/, "")}/index.html`;
+  return `${window.location.origin}${path}`;
 }
 
 async function initMaterialsAdmin() {

@@ -475,10 +475,6 @@ address,
   text-transform: uppercase;
 }
 
-.print-subject-button {
-  flex: 0 0 auto;
-}
-
 .material-category {
   padding: 18px 22px 20px;
 }
@@ -487,10 +483,22 @@ address,
   border-top: 1px solid var(--line);
 }
 
-.material-category h4 {
-  margin: 0 0 12px;
+.category-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.category-head h4 {
+  margin: 0;
   color: var(--ink);
   font-size: 18px;
+}
+
+.print-category-button {
+  flex: 0 0 auto;
 }
 
 .category-material-list {
@@ -903,7 +911,12 @@ address {
     flex-direction: column;
   }
 
-  .print-subject-button,
+  .category-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .print-category-button,
   .download-link {
     width: 100%;
   }
