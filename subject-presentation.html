@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Process Management &amp; CPU Scheduling | Dr. Jayna Donga</title>
+    <meta name="description" content="An Operating Systems lesson on process states, scheduling, and first-come, first-served scheduling.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="subject-presentation.css">
+    <script src="script.js" defer></script>
+    <script src="subject-presentation.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Dr. Jayna Donga home">
+        <span class="brand-mark">JD</span>
+        <span>
+          <strong>Dr. Jayna Donga</strong>
+          <small>Computer Engineering</small>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">Menu</button>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html#about">About</a>
+        <a href="index.html#subjects">Subjects</a>
+        <a href="index.html#materials">Materials</a>
+        <a href="subject-presentation.html" aria-current="page">Subject Presentation</a>
+        <a href="index.html#research">Research</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="lesson-page" id="main">
+      <header class="lesson-heading">
+        <p class="lesson-subject"><a href="index.html#subjects">Operating Systems</a> <span aria-hidden="true">/</span> Subject Presentation</p>
+        <h1>Process Management &amp; CPU Scheduling</h1>
+      </header>
+
+      <div class="lesson-layout">
+        <div class="lesson-reader" data-lesson-reader>
+          <div class="lesson-toolbar" role="group" aria-label="Slide controls" hidden>
+            <button type="button" data-previous aria-label="Previous slide" title="Previous slide">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <div class="lesson-position">
+              <span data-slide-count aria-hidden="true"></span>
+              <progress aria-label="Slide progress"></progress>
+              <span class="lesson-sr-only" data-slide-announcement aria-live="polite"></span>
+            </div>
+            <button type="button" data-next aria-label="Next slide" title="Next slide">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <button type="button" data-fullscreen aria-label="Enter fullscreen" title="Enter fullscreen" hidden>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3m0 8v3a2 2 0 0 1-2 2h-3m-8 0H5a2 2 0 0 1-2-2v-3"/></svg>
+            </button>
+          </div>
+
+          <section class="lesson-slide" id="what-is-a-process">
+            <p class="lesson-kicker">Process Management</p>
+            <h2 tabindex="-1">What is a process?</h2>
+            <p class="lesson-lede">A process is a running instance of a program.</p>
+            <ul class="lesson-points">
+              <li><strong>Program:</strong> Stored instructions. A program does nothing until it is executed.</li>
+              <li><strong>Process:</strong> An active execution with code, data, resources, and an OS record called a process control block.</li>
+              <li>The same program can have several processes. They may share the same code, but each has its own execution state and data.</li>
+              <li>With several processes active, the OS schedules CPU time. Processes can exchange data through interprocess communication (IPC).</li>
+            </ul>
+            <p class="lesson-note"><strong>Example:</strong> Start two instances of the same program. Both use the same executable, but each can be at a different instruction.</p>
+          </section>
+
+          <section class="lesson-slide" id="cpu-and-io-bursts">
+            <p class="lesson-kicker">Process Management</p>
+            <h2 tabindex="-1">CPU and I/O bursts</h2>
+            <p class="lesson-lede">A process typically alternates between computing and performing I/O.</p>
+            <ol class="lesson-flow" aria-label="Example burst sequence">
+              <li><strong>CPU</strong><span>Initialize variables</span></li>
+              <li><strong>I/O</strong><span>Read input</span></li>
+              <li><strong>CPU</strong><span>Calculate a result</span></li>
+              <li><strong>I/O</strong><span>Write output</span></li>
+            </ol>
+            <ul class="lesson-points">
+              <li><strong>CPU-bound:</strong> Computation dominates, so CPU bursts tend to be longer. Think of a large numerical calculation.</li>
+              <li><strong>I/O-bound:</strong> Time is dominated by input or output. Think of a task that frequently waits for disk reads.</li>
+            </ul>
+            <p class="lesson-note"><strong>Remember:</strong> While one process waits for I/O, another ready process can use the CPU.</p>
+          </section>
+
+          <section class="lesson-slide" id="process-states">
+            <p class="lesson-kicker">Process Management</p>
+            <h2 tabindex="-1">Five process states</h2>
+            <dl class="lesson-definitions">
+              <div><dt>New</dt><dd>The OS is creating the process.</dd></div>
+              <div><dt>Ready</dt><dd>It can run as soon as a CPU is assigned.</dd></div>
+              <div><dt>Running</dt><dd>Its instructions are executing on a CPU.</dd></div>
+              <div><dt>Waiting (blocked)</dt><dd>It needs an event such as I/O completion before it can run again.</dd></div>
+              <div><dt>Terminated</dt><dd>It has finished or has been stopped.</dd></div>
+            </dl>
+            <p class="lesson-note"><strong>Key distinction:</strong> Ready means waiting for the CPU. Blocked means waiting for an event, even when the CPU is idle.</p>
+          </section>
+
+          <section class="lesson-slide" id="state-transitions">
+            <p class="lesson-kicker">Process Management</p>
+            <h2 tabindex="-1">How processes change state</h2>
+            <ol class="lesson-flow" aria-label="Example lifecycle with an I/O request">
+              <li><strong>Running</strong><span>Requests a disk read</span></li>
+              <li><strong>Waiting</strong><span>Disk read completes</span></li>
+              <li><strong>Ready</strong><span>Scheduler selects it</span></li>
+              <li><strong>Running</strong><span>Continues execution</span></li>
+            </ol>
+            <dl class="lesson-definitions">
+              <div><dt>New &rarr; Ready</dt><dd>The OS admits the process.</dd></div>
+              <div><dt>Ready &rarr; Running</dt><dd>The dispatcher hands it the CPU.</dd></div>
+              <div><dt>Running &rarr; Ready</dt><dd>A time slice expires or a higher-priority process preempts it.</dd></div>
+              <div><dt>Running &rarr; Waiting</dt><dd>It requests I/O or blocks on an event.</dd></div>
+              <div><dt>Waiting &rarr; Ready</dt><dd>The event occurs; it may still need to wait for the CPU.</dd></div>
+              <div><dt>Running &rarr; Terminated</dt><dd>It exits or is stopped.</dd></div>
+            </dl>
+          </section>
+
+          <section class="lesson-slide" id="process-control-block">
+            <p class="lesson-kicker">Process Management</p>
+            <h2 tabindex="-1">Process control block (PCB)</h2>
+            <p class="lesson-lede">The PCB is the OS record for a process. The process table tracks these records.</p>
+            <dl class="lesson-definitions">
+              <div><dt>Identity</dt><dd>Process ID (PID) and parent or child relationships.</dd></div>
+              <div><dt>Execution context</dt><dd>Process state, CPU registers, and the program counter for the next instruction.</dd></div>
+              <div><dt>Scheduling and events</dt><dd>Priority, queue references, and the event a blocked process is waiting for.</dd></div>
+              <div><dt>Resources</dt><dd>Memory mappings, open files, and I/O information.</dd></div>
+            </dl>
+            <p class="lesson-note"><strong>Why it matters:</strong> Saving the program counter and registers lets a process resume from where it was interrupted.</p>
+          </section>
+
+          <section class="lesson-slide" id="scheduling-queues">
+            <p class="lesson-kicker">Process Management</p>
+            <h2 tabindex="-1">Scheduling queues</h2>
+            <dl class="lesson-definitions">
+              <div><dt>Job queue</dt><dd>Holds jobs waiting to be admitted in the textbook model.</dd></div>
+              <div><dt>Ready queue</dt><dd>Holds runnable processes waiting for CPU time.</dd></div>
+              <div><dt>Device queue</dt><dd>Holds requests or processes waiting for a particular I/O device.</dd></div>
+            </dl>
+            <p class="lesson-note"><strong>Follow a process:</strong> It enters the ready queue, gets CPU time, and may move to a device queue. When I/O finishes, it rejoins the ready queue.</p>
+            <p>One way to represent a queue is as a linked list of PCBs, with references to its first and last entries.</p>
+          </section>
+
+          <section class="lesson-slide" id="when-to-schedule">
+            <p class="lesson-kicker">CPU Scheduling</p>
+            <h2 tabindex="-1">When does the scheduler act?</h2>
+            <p class="lesson-lede">CPU scheduling selects which ready process should run next.</p>
+            <dl class="lesson-definitions">
+              <div><dt>A running process blocks</dt><dd>Choose a ready process, if one exists.</dd></div>
+              <div><dt>A running process exits</dt><dd>Choose a ready process, if one exists.</dd></div>
+              <div><dt>A running process is preempted</dt><dd>It returns to the ready queue, and the scheduler selects what runs next.</dd></div>
+              <div><dt>A blocked process becomes ready</dt><dd>A preemptive policy may switch processes or let the current one continue.</dd></div>
+            </dl>
+            <p class="lesson-note"><strong>Remember:</strong> An I/O completion makes a process ready; it does not guarantee an immediate turn on the CPU.</p>
+          </section>
+
+          <section class="lesson-slide" id="dispatcher">
+            <p class="lesson-kicker">CPU Scheduling</p>
+            <h2 tabindex="-1">Scheduler vs. dispatcher</h2>
+            <p class="lesson-lede"><strong>The scheduler chooses.</strong> The dispatcher hands over the CPU.</p>
+            <ol class="lesson-points">
+              <li>Save the outgoing process's context and load or restore the selected process's context.</li>
+              <li>Switch to user mode if the selected process is a user process.</li>
+              <li>Transfer control to the selected process's next instruction, or its entry point if it is starting.</li>
+            </ol>
+            <p class="lesson-note"><strong>Dispatch latency:</strong> The time it takes to stop one process and start or resume another.</p>
+          </section>
+
+          <section class="lesson-slide" id="scheduling-criteria">
+            <p class="lesson-kicker">CPU Scheduling</p>
+            <h2 tabindex="-1">What makes a scheduler effective?</h2>
+            <dl class="lesson-definitions">
+              <div><dt>Fairness</dt><dd>Give eligible processes a fair share of CPU time.</dd></div>
+              <div><dt>CPU utilization</dt><dd>Keep the CPU busy for a larger share of elapsed time.</dd></div>
+              <div><dt>Balanced utilization</dt><dd>Keep CPU and I/O resources productively occupied.</dd></div>
+              <div><dt>Throughput</dt><dd>Complete more processes per unit of time.</dd></div>
+              <div><dt>Turnaround time</dt><dd>Minimize the time from arrival to completion.</dd></div>
+              <div><dt>Waiting time</dt><dd>Minimize the total time spent in the ready queue, not time blocked for I/O.</dd></div>
+              <div><dt>Response time</dt><dd>Reduce the time from a request to the start of its response.</dd></div>
+            </dl>
+            <p class="lesson-note"><strong>Trade-off:</strong> A policy that improves throughput may not give the quickest response to an interactive request.</p>
+          </section>
+
+          <section class="lesson-slide" id="preemption">
+            <p class="lesson-kicker">CPU Scheduling</p>
+            <h2 tabindex="-1">Preemptive vs. non-preemptive</h2>
+            <div class="lesson-comparison">
+              <div>
+                <h3>Non-preemptive</h3>
+                <ul class="lesson-points">
+                  <li>Once selected, a process keeps the CPU until it exits or blocks.</li>
+                  <li>Examples: FCFS and non-preemptive shortest job first (SJF).</li>
+                </ul>
+              </div>
+              <div>
+                <h3>Preemptive</h3>
+                <ul class="lesson-points">
+                  <li>The OS can take back the CPU before the process finishes or blocks.</li>
+                  <li>A preempted process returns to the ready queue. Examples: round robin and shortest remaining time next (SRTN).</li>
+                </ul>
+              </div>
+            </div>
+            <p class="lesson-note"><strong>Remember:</strong> A priority-based policy can be preemptive or non-preemptive.</p>
+          </section>
+
+          <section class="lesson-slide" id="fcfs">
+            <p class="lesson-kicker">Scheduling Algorithms</p>
+            <h2 tabindex="-1">First-come, first-served (FCFS)</h2>
+            <p class="lesson-lede">Give the CPU to the process that has been waiting at the head of the ready queue.</p>
+            <ol class="lesson-points">
+              <li>Add arriving or newly unblocked processes to the tail of the ready queue.</li>
+              <li>When the CPU is free, remove the process at the head and run it.</li>
+              <li>Continue running that process until it exits or blocks. A new arrival does not interrupt it.</li>
+            </ol>
+            <p class="lesson-note"><strong>FIFO rule:</strong> First in, first out. A long process at the front can make several short processes wait.</p>
+          </section>
+
+          <section class="lesson-slide" id="fcfs-example">
+            <p class="lesson-kicker">Worked Example</p>
+            <h2 tabindex="-1">Worked FCFS example</h2>
+            <p class="lesson-lede">Four processes arrive at different times. Each has one CPU burst and no I/O.</p>
+            <figure class="lesson-timeline">
+              <figcaption>CPU timeline (ms)</figcaption>
+              <ol role="list">
+                <li style="--burst: 15">P1 <span>0&ndash;15</span></li>
+                <li style="--burst: 6">P2 <span>15&ndash;21</span></li>
+                <li style="--burst: 7">P3 <span>21&ndash;28</span></li>
+                <li style="--burst: 5">P4 <span>28&ndash;33</span></li>
+              </ol>
+            </figure>
+            <table class="lesson-table">
+              <caption class="lesson-sr-only">Arrival, start, finish, wait, and turnaround times in milliseconds</caption>
+              <thead><tr><th scope="col">PID</th><th scope="col">Arrival</th><th scope="col">Start</th><th scope="col">End</th><th scope="col">Wait</th><th scope="col">Turnaround</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">P1</th><td>0</td><td>0</td><td>15</td><td>0</td><td>15</td></tr>
+                <tr><th scope="row">P2</th><td>2</td><td>15</td><td>21</td><td>13</td><td>19</td></tr>
+                <tr><th scope="row">P3</th><td>3</td><td>21</td><td>28</td><td>18</td><td>25</td></tr>
+                <tr><th scope="row">P4</th><td>5</td><td>28</td><td>33</td><td>23</td><td>28</td></tr>
+              </tbody>
+            </table>
+            <p class="lesson-note"><strong>Average wait:</strong> 13.5 ms (start minus arrival). <strong>Average turnaround:</strong> 21.75 ms (finish minus arrival).</p>
+          </section>
+
+          <section class="lesson-slide" id="knowledge-check">
+            <p class="lesson-kicker">Review</p>
+            <h2 tabindex="-1">Check your understanding</h2>
+            <details class="lesson-question">
+              <summary>A disk read finishes. Does the waiting process start running immediately?</summary>
+              <p>No. It becomes ready and has to be selected for CPU time.</p>
+            </details>
+            <details class="lesson-question">
+              <summary>What information lets an interrupted process resume in the right place?</summary>
+              <p>Its saved program counter and CPU registers are restored as part of the context switch.</p>
+            </details>
+            <details class="lesson-question">
+              <summary>Why does P4 wait 23 ms in the FCFS example?</summary>
+              <p>It arrives at 5 ms, but P1, P2, and P3 entered first. P4 starts at 28 ms, so its wait is 28 &minus; 5 = 23 ms.</p>
+            </details>
+          </section>
+        </div>
+
+        <nav class="lesson-outline" aria-label="Lesson outline">
+          <h2>Lesson Outline</h2>
+          <ol>
+            <li><a href="#what-is-a-process">What is a process?</a></li>
+            <li><a href="#cpu-and-io-bursts">CPU and I/O bursts</a></li>
+            <li><a href="#process-states">Five process states</a></li>
+            <li><a href="#state-transitions">State transitions</a></li>
+            <li><a href="#process-control-block">Process control block</a></li>
+            <li><a href="#scheduling-queues">Scheduling queues</a></li>
+            <li><a href="#when-to-schedule">When to schedule</a></li>
+            <li><a href="#dispatcher">Scheduler vs. dispatcher</a></li>
+            <li><a href="#scheduling-criteria">Scheduling criteria</a></li>
+            <li><a href="#preemption">Preemptive vs. non-preemptive</a></li>
+            <li><a href="#fcfs">First-come, first-served</a></li>
+            <li><a href="#fcfs-example">Worked FCFS example</a></li>
+            <li><a href="#knowledge-check">Knowledge check</a></li>
+          </ol>
+        </nav>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 Dr. Jayna Donga. Academic Portfolio.</p>
+      <a href="index.html#materials">Back to Materials</a>
+    </footer>
+  </body>
+</html>
